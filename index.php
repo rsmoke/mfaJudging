@@ -92,33 +92,57 @@ if ($resJudge->num_rows > 0) {
 
 <div id="contest">
   <div class="row clearfix">
+    <div class="bg-warning infosection">
+    <h5 class="text-muted">Select an entry that you want to evaluate. Entries that 
+      you have evaluated will be disabled (greyed out).</h5><a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
+    </div>
+  </div>
+  <div class="row clearfix">
     <div class="col-md-12">
-    <h5 class="text-muted">Select an entry that you want to evaluate. Entries that you have evaluated will be disabled (greyed out).</h5>
+
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 <?php
 //query for existing contests and populate the panels
+// $sqlContestSelect = <<<SQL
+//         SELECT
+//             `tbl_contest`.`id` AS ContestId,
+//             `tbl_contest`.`date_open`,
+//             `tbl_contest`.`date_closed`,
+//             `tbl_contest`.`notes` AS ContestNotes,
+//             `tbl_contest`.`created_by`,
+//             `tbl_contest`.`judgingOpen`,
+//             `lk_contests`.`name`,
+//             `lk_contests`.`shortName`,
+//             `lk_contests`.`freshmanEligible`,
+//             `lk_contests`.`sophmoreEligible`,
+//             `lk_contests`.`juniorEligible`,
+//             `lk_contests`.`seniorEligible`,
+//             `lk_contests`.`graduateEligible`
+
+//         FROM tbl_contest
+//         JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+//         WHERE `tbl_contest`.`judgingOpen` = 1
+//         ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
+
+// SQL;
 $sqlContestSelect = <<<SQL
-        SELECT
-            `tbl_contest`.`id` AS ContestId,
-            `tbl_contest`.`date_open`,
-            `tbl_contest`.`date_closed`,
-            `tbl_contest`.`notes` AS ContestNotes,
-            `tbl_contest`.`created_by`,
-            `tbl_contest`.`judgingOpen`,
-            `lk_contests`.`name`,
-            `lk_contests`.`shortName`,
-            `lk_contests`.`freshmanEligible`,
-            `lk_contests`.`sophmoreEligible`,
-            `lk_contests`.`juniorEligible`,
-            `lk_contests`.`seniorEligible`,
-            `lk_contests`.`graduateEligible`
-
-        FROM tbl_contest
-        JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-        WHERE `tbl_contest`.`judgingOpen` = 1
-        ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
-
+SELECT
+        `tbl_contest`.`id` AS ContestId,
+        `tbl_contest`.`date_closed`,
+        `tbl_contest`.`judgingOpen`,
+        `lk_contests`.`name`,
+        `lk_contests`.`freshmanEligible`,
+        `lk_contests`.`sophmoreEligible`,
+        `lk_contests`.`juniorEligible`,
+        `lk_contests`.`seniorEligible`,
+        `lk_contests`.`graduateEligible`,
+        `tbl_contestjudge`.`uniqname`
+    FROM tbl_contest
+    JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+    JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
+    WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`uniqname` = '$login_name'
+    ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
 SQL;
 
 $results = $db->query($sqlContestSelect);
