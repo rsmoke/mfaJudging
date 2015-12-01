@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudging.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -38,15 +38,15 @@ if ($resJudge->num_rows > 0) {
   <meta name="description" content="LSA-English Writing Contests">
   <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
   <meta name="author" content="LSA-MIS_rsmoke">
-  <link rel="icon" href="img/favicon.ico">
+  <link rel="icon" href="jdgIMG/favicon.ico">
 
-  <script type='text/javascript' src='../js/webforms2.js'></script>
+<!--   <script type='text/javascript' src='../js/webforms2.js'></script> -->
 
-  <link rel="stylesheet" href="../css/bootstrap.min.css"><!-- 3.3.1 -->
-  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="../css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/normalize.css" media="all">
-  <link rel="stylesheet" href="../css/default.css" media="all">
+  <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/normalize.css" media="all">
+  <link rel="stylesheet" href="css/default.css" media="all">
 
   <style type="text/css">
     input[type=number]::-webkit-outer-spin-button,
@@ -220,7 +220,7 @@ if (!$resultsInd) {
 }
     include("footer.php");?>
     <!-- //additional script specific to this page -->
-      <script src="judging/jdgJS/jdgMyScript.js"></script>
+      <script src="js/jdgMyScript.js"></script>
 </div><!-- End Container of all things -->
 </body>
 </html>
