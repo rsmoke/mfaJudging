@@ -7,5 +7,7 @@ $( document ).ready(function(){
 
   //disable button after an evaluation has occurred
   //disabled="disabled"
+  
+  $(".btn[data-entryid='90']").toggleClass( "disabled" );
 
 });
