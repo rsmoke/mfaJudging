@@ -155,7 +155,7 @@ SQL;
         echo "<hr>";
 
 ?>
-        <form action="http://writingcontest.dev<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
          <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
          <input type="hidden" name="entryid" value=" <?php echo  $entryid; ?> ">
           <div class="radio">
