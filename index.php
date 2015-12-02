@@ -103,32 +103,9 @@ if ($resJudge->num_rows > 0) {
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 <?php
-//query for existing contests and populate the panels
-// $sqlContestSelect = <<<SQL
-//         SELECT
-//             `tbl_contest`.`id` AS ContestId,
-//             `tbl_contest`.`date_open`,
-//             `tbl_contest`.`date_closed`,
-//             `tbl_contest`.`notes` AS ContestNotes,
-//             `tbl_contest`.`created_by`,
-//             `tbl_contest`.`judgingOpen`,
-//             `lk_contests`.`name`,
-//             `lk_contests`.`shortName`,
-//             `lk_contests`.`freshmanEligible`,
-//             `lk_contests`.`sophmoreEligible`,
-//             `lk_contests`.`juniorEligible`,
-//             `lk_contests`.`seniorEligible`,
-//             `lk_contests`.`graduateEligible`
-
-//         FROM tbl_contest
-//         JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-//         WHERE `tbl_contest`.`judgingOpen` = 1
-//         ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
-
-// SQL;
 $sqlContestSelect = <<<SQL
 SELECT
-        `tbl_contest`.`id` AS ContestId,
+        DISTINCT `tbl_contest`.`id` AS ContestId,
         `tbl_contest`.`date_closed`,
         `tbl_contest`.`judgingOpen`,
         `lk_contests`.`name`,
@@ -182,11 +159,14 @@ if (!$results) {
                 <tbody>
 <?php
 $sqlIndEntry = <<<SQL
-    SELECT *
-    FROM vw_entrydetail
-    LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id`)
-    WHERE ContestInstance = {$instance['ContestId']}
-
+   SELECT *
+   FROM vw_entrydetail
+   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id`)
+    WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
+      SELECT DISTINCT name
+      FROM `lk_category`
+      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)  
+      WHERE uniqname = '$login_name')
 SQL;
 $resultsInd = $db->query($sqlIndEntry);
 if (!$resultsInd) {
