@@ -5,9 +5,4 @@ $( document ).ready(function(){
     document.location = 'evaluation.php?evid=' + entryid;
   });
 
-  //disable button after an evaluation has occurred
-  //disabled="disabled"
-  
-  $(".btn[data-entryid='90']").toggleClass( "disabled" );
-
 });
