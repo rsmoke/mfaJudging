@@ -9,6 +9,7 @@
  RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif) [NC]
  RewriteRule .* /hopwoodjudging/closed-index.php [R=302,L]
 </IfModule>
+# MAINTENANCE-PAGE REDIRECT
 
 CosignProtected On
 AuthType Cosign
