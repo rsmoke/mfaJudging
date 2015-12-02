@@ -184,15 +184,17 @@ if (!$results) {
 $sqlIndEntry = <<<SQL
     SELECT *
     FROM vw_entrydetail
+    LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id`)
     WHERE ContestInstance = {$instance['ContestId']}
 
 SQL;
 $resultsInd = $db->query($sqlIndEntry);
 if (!$resultsInd) {
-    echo "There are no applicants available";
+    echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-        echo '<tr><td><button class="btn btn-sm btn-info btn-eval" data-entryid="' . $entry['EntryId'] . '"><span class="glyphicon glyphicon-list-alt"></span></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      $disable = ($entry["rating"])? "disabled" : "";
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"><span class="glyphicon glyphicon-list-alt"></span></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
