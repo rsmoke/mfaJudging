@@ -14,6 +14,14 @@ if (isset($_POST["evaluate"]) && ($_SESSION["isJudge"])){
     $evalComment = htmlspecialchars(($_POST["evalComments"]));
     $entryid = htmlspecialchars(($_POST["entryid"]));
 
+    if ($evalRadio == "" ){
+      non_db_error("User: " . $login_name . " -evaluation submission error- User did not select rating");
+      exit($user_err_message);
+    } else if(strlen($evalComment) <= 0){
+      non_db_error("User: " . $login_name . " -evaluation submission error- User did enter a comment");
+      exit($user_err_message);
+    }
+
     //insert eval into table
     $sqlInsert = <<<SQL
     INSERT INTO `tbl_evaluations`
@@ -27,7 +35,6 @@ if (isset($_POST["evaluate"]) && ($_SESSION["isJudge"])){
         '$evalComment',
         $entryid)
 SQL;
-echo $sqlInsert;
     if (!$result = $db->query($sqlInsert)) {
           db_fatal_error($db->error, $login_name . " -data insert issue- " . $sqlInsert);
           exit($user_err_message);
@@ -38,6 +45,8 @@ echo $sqlInsert;
         safeRedirect('index.php');
         exit();
     }
+} else {
+  non_db_error("User: " . $login_name . " -evaluation submission error- isJudge set to: " . $_SESSION["isJudge"]);
 }
 
 
@@ -77,8 +86,6 @@ SQL;
   <meta name="author" content="LSA-MIS_rsmoke">
   <link rel="icon" href="img/favicon.ico">
 
-  <script type='text/javascript' src='../js/webforms2.js'></script>
-
   <link rel="stylesheet" href="../css/bootstrap.min.css"><!-- 3.3.1 -->
   <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="../css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
@@ -86,15 +93,23 @@ SQL;
   <link rel="stylesheet" href="../css/default.css" media="all">
 
   <style type="text/css">
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+      .invalid input:required:invalid {
+          background: #BE4C54;
+      }
 
-    input[type=number] {
-        -moz-appearance:textfield;
-    }
+      .invalid input:required:valid {
+          background: #17D654 ;
+      }
+      .invalid textarea:required:invalid {
+          background: #BE4C54;
+      }
+      .invalid textarea:required:valid {
+          background: #17D654 ;
+      }
+      input {
+        display: block;
+        margin-bottom: 10px;
+      }
   </style>
   <base href=<?php echo URL ?>>
 </head>
@@ -130,9 +145,7 @@ SQL;
     <div class="col-md-12">
         <div>
             <h1>Evaluation</h1>
-             <ul>
-             <li>Contest rules can be found <a href='http://www.lsa.umich.edu/hopwood/contestsprizes' target='_blank'>here</a></li>
-             </ul>
+              <a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
         </div>
 
          <hr>
@@ -155,9 +168,12 @@ SQL;
         echo "<hr>";
 
 ?>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
          <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
          <input type="hidden" name="entryid" value=" <?php echo  $entryid; ?> ">
+         <div class="bg-warning infosection">
+         Both <strong>Rating</strong> and <strong>comments</strong> are required.
+         </div>
           <div class="radio">
           Rating:<br />
             <label class="radio-inline">
@@ -175,14 +191,15 @@ SQL;
             <label class="radio-inline">
               <input type="radio" name="evalRadio" id="evalRadio5" value="5"> 5
             </label>
-            <br />( 1=Lowest rating  to 5=Highest rating )
+            <br />( 1=Lowest rating &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5=Highest rating )
           </div>
           <div class="form-group">
             <label for="evalComments">Comments</label>
-            <textarea class="form-control" id="evalComments" name="evalComments" required></textarea>
+            <textarea class="form-control" id="evalComments" name="evalComments" placeholder="required" required></textarea>
           </div>
-          <button type="submit" class="btn btn-success" name="evaluate">Submit Evaluation</button>
+          <input type="submit" class="btn btn-success" name="evaluate" />
         </form>
+        <p>Status: <span id="status">Unsubmitted</span></p>
 <?php
     } else {
         echo "Nothing to show!";
@@ -218,7 +235,7 @@ SQL;
 }
     include("footer.php");?>
     <!-- //additional script specific to this page -->
-      <script src="judging/jdgJS/jdgMyScript.js"></script>
+      <script src="js/jdgMyScript.js"></script>
 </div><!-- End Container of all things -->
 </body>
 </html>
