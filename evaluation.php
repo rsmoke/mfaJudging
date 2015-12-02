@@ -86,11 +86,11 @@ SQL;
   <meta name="author" content="LSA-MIS_rsmoke">
   <link rel="icon" href="img/favicon.ico">
 
-  <link rel="stylesheet" href="../css/bootstrap.min.css"><!-- 3.3.1 -->
-  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="../css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/normalize.css" media="all">
-  <link rel="stylesheet" href="../css/default.css" media="all">
+  <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/normalize.css" media="all">
+  <link rel="stylesheet" href="css/default.css" media="all">
 
   <style type="text/css">
       .invalid input:required:invalid {

@@ -38,7 +38,7 @@ if ($resJudge->num_rows > 0) {
   <meta name="description" content="LSA-English Writing Contests">
   <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
   <meta name="author" content="LSA-MIS_rsmoke">
-  <link rel="icon" href="jdgIMG/favicon.ico">
+  <link rel="icon" href="img/favicon.ico">
 
 <!--   <script type='text/javascript' src='../js/webforms2.js'></script> -->
 

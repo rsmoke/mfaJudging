@@ -17,7 +17,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
   <link rel="icon" href="img/favicon.ico">
   <style>
     html { 
-    background: url(img/HopwoodArt.jpg) no-repeat center center fixed; 
+    background: url(img/evaluateImage.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -26,7 +26,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/HopwoodArt.jpg', sizingMethod='scale')";
   }
   .text-center {
-      color: white;
+      color: black;
       font-weight: bold;
       text-align: center;
   }
