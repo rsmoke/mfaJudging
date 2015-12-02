@@ -3,4 +3,6 @@ $( document ).ready(function(){
     var entryid = $(this).data('entryid');
     document.location = 'evaluation.php?evid=' + entryid;
   });
+
+  $('.disabled').toggleClass("btn-info");
 });
