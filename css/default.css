@@ -4,7 +4,7 @@
 
 .star-rating {
   font-family: 'FontAwesome';
-  margin: 50px auto;
+  margin: 2px auto;
 }
 .star-rating > fieldset {
   border: none;
@@ -22,7 +22,7 @@
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
-  font-size: 200%;
+  font-size: 150%;
   color: #16a085;
 }
 .star-rating > fieldset:not(:checked) > label:before {
