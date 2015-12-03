@@ -7,48 +7,49 @@ if (session_status() == PHP_SESSION_NONE) {
 // echo '<p>' . print_r($_SESSION) . '</p>';
 // echo '<p>' . $_SERVER["PHP_SELF"] . '</p>';
 
-if (isset($_POST["evaluate"]) && ($_SESSION["isJudge"])){
-    //scrub data
-    $evaluator = htmlspecialchars(($_POST["evaluator"]));
-    $rating = htmlspecialchars(($_POST["rating"]));
-    $evalComment = htmlspecialchars(($_POST["evalComments"]));
-    $entryid = htmlspecialchars(($_POST["entryid"]));
+if (isset($_POST["evaluate"])) {
+  if ($_SESSION["isJudge"]){
+      //scrub data
+      $evaluator = htmlspecialchars(($_POST["evaluator"]));
+      $rating = htmlspecialchars(($_POST["rating"]));
+      $evalComment = htmlspecialchars(($_POST["evalComments"]));
+      $entryid = htmlspecialchars(($_POST["entryid"]));
 
-    if ($rating == "" ){
-      non_db_error("User: " . $login_name . " -evaluation submission error- User did not select rating");
-      exit($user_err_message);
-    } else if(strlen($evalComment) <= 0){
-      non_db_error("User: " . $login_name . " -evaluation submission error- User did enter a comment");
-      exit($user_err_message);
-    }
+      if ($rating == "" ){
+        non_db_error("User: " . $login_name . " -evaluation submission error- User did not select rating");
+        exit($user_err_message);
+      } else if(strlen($evalComment) <= 0){
+        non_db_error("User: " . $login_name . " -evaluation submission error- User did enter a comment");
+        exit($user_err_message);
+      }
 
-    //insert eval into table
-    $sqlInsert = <<<SQL
-    INSERT INTO `tbl_evaluations`
-        (`evaluator`,
-        `rating`,
-        `comment`,
-        `entry_id`)
-        VALUES
-        ('$evaluator',
-        $rating,
-        '$evalComment',
-        $entryid)
+      //insert eval into table
+      $sqlInsert = <<<SQL
+      INSERT INTO `tbl_evaluations`
+          (`evaluator`,
+          `rating`,
+          `comment`,
+          `entry_id`)
+          VALUES
+          ('$evaluator',
+          $rating,
+          '$evalComment',
+          $entryid)
 SQL;
-    if (!$result = $db->query($sqlInsert)) {
-          db_fatal_error($db->error, $login_name . " -data insert issue- " . $sqlInsert);
-          exit($user_err_message);
-    } else {
-        $db->close();
-        unset($_POST['evaluate']);
-        $evaluator = $rating = $evalComment = $entryid = null;
-        safeRedirect('index.php');
-        exit();
-    }
-} else {
-  non_db_error("User: " . $login_name . " -evaluation submission error- isJudge set to: " . $_SESSION["isJudge"]);
+      if (!$result = $db->query($sqlInsert)) {
+            db_fatal_error($db->error, $login_name . " -data insert issue- " . $sqlInsert);
+            exit($user_err_message);
+      } else {
+          $db->close();
+          unset($_POST['evaluate']);
+          $evaluator = $rating = $evalComment = $entryid = null;
+          safeRedirect('index.php');
+          exit();
+      }
+  } else {
+    non_db_error("User: " . $login_name . " -evaluation submission error- isJudge set to: " . $_SESSION["isJudge"]);
+  }
 }
-
 
 $entryid = $db->real_escape_string(htmlspecialchars($_GET["evid"]));
 
