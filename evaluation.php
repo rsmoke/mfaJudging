@@ -10,11 +10,11 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST["evaluate"]) && ($_SESSION["isJudge"])){
     //scrub data
     $evaluator = htmlspecialchars(($_POST["evaluator"]));
-    $evalRadio = htmlspecialchars(($_POST["evalRadio"]));
+    $rating = htmlspecialchars(($_POST["rating"]));
     $evalComment = htmlspecialchars(($_POST["evalComments"]));
     $entryid = htmlspecialchars(($_POST["entryid"]));
 
-    if ($evalRadio == "" ){
+    if ($rating == "" ){
       non_db_error("User: " . $login_name . " -evaluation submission error- User did not select rating");
       exit($user_err_message);
     } else if(strlen($evalComment) <= 0){
@@ -31,7 +31,7 @@ if (isset($_POST["evaluate"]) && ($_SESSION["isJudge"])){
         `entry_id`)
         VALUES
         ('$evaluator',
-        $evalRadio,
+        $rating,
         '$evalComment',
         $entryid)
 SQL;
@@ -41,7 +41,7 @@ SQL;
     } else {
         $db->close();
         unset($_POST['evaluate']);
-        $evaluator = $evalRadio = $evalComment = $entryid = null;
+        $evaluator = $rating = $evalComment = $entryid = null;
         safeRedirect('index.php');
         exit();
     }
@@ -89,28 +89,11 @@ SQL;
   <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/normalize.css" media="all">
   <link rel="stylesheet" href="css/default.css" media="all">
+  <link rel="stylesheet" href="css/validator.css" media="all">
 
-  <style type="text/css">
-      .invalid input:required:invalid {
-          background: #BE4C54;
-      }
-
-      .invalid input:required:valid {
-          background: #17D654 ;
-      }
-      .invalid textarea:required:invalid {
-          background: #BE4C54;
-      }
-      .invalid textarea:required:valid {
-          background: #17D654 ;
-      }
-      input {
-        display: block;
-        margin-bottom: 10px;
-      }
-  </style>
   <base href=<?php echo URL ?>>
 </head>
 
@@ -174,25 +157,16 @@ SQL;
          <div class="bg-warning infosection">
          Both <strong>Rating</strong> and <strong>comments</strong> are required.
          </div>
-          <div class="radio">
-          Rating:<br />
-            <label class="radio-inline">
-              <input type="radio" name="evalRadio" id="evalRadio1" value="1" required> 1
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="evalRadio" id="evalRadio2" value="2"> 2
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="evalRadio" id="evalRadio3" value="3"> 3
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="evalRadio" id="evalRadio4" value="4"> 4
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="evalRadio" id="evalRadio5" value="5"> 5
-            </label>
-            <br />( 1=Lowest rating &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5=Highest rating )
-          </div>
+            <strong>Rating</strong>
+            <div class="star-rating">
+              <fieldset>
+                <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="Outstanding">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Very Good">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Good">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Poor">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Very Poor">1 star</label>
+              </fieldset>
+            </div>
           <div class="form-group">
             <label for="evalComments">Comments</label>
             <textarea class="form-control" id="evalComments" name="evalComments" placeholder="required" required></textarea>
@@ -236,6 +210,7 @@ SQL;
     include("footer.php");?>
     <!-- //additional script specific to this page -->
       <script src="js/jdgMyScript.js"></script>
+      <script src="js/validator.js"></script>
 </div><!-- End Container of all things -->
 </body>
 </html>
