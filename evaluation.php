@@ -4,8 +4,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// echo '<p>' . print_r($_SESSION) . '</p>';
-// echo '<p>' . $_SERVER["PHP_SELF"] . '</p>';
 
 if (isset($_POST["evaluate"])) {
   if ($_SESSION["isJudge"]){
@@ -137,17 +135,11 @@ SQL;
         while ($row = $result->fetch_assoc()) {
             echo "<div style='padding: 0 0 0 40px;'>";
             echo "<strong>Entry Title: </strong><mark>" . $row["title"] . "</mark>  <br />";
-
             echo '<a href="contestfiles/' . $row['document'] . '" target="_blank">Read</a><br /><br />';
-
             echo "<strong>Authors Pen-name:</strong> " . $row["penName"] ."<br />";
-
             echo "<strong>The contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
-
             echo '<strong>Date Submitted Online:</strong> ' . date_format(date_create($row["datesubmitted"]),"F jS Y \a\\t g:ia") . '<br />';
-
             echo "</div>";
-
         }
         echo "<hr>";
 
