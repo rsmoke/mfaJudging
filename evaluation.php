@@ -10,16 +10,17 @@ if (isset($_POST["evaluate"])) {
       //scrub data
       $evaluator = htmlspecialchars(($_POST["evaluator"]));
       $rating = htmlspecialchars(($_POST["rating"]));
-      $evalComment = htmlspecialchars(($_POST["evalComments"]));
+      $evalComment = $db->real_escape_string( htmlspecialchars(($_POST["evalComments"])));
       $entryid = htmlspecialchars(($_POST["entryid"]));
 
       if ($rating == "" ){
         non_db_error("User: " . $login_name . " -evaluation submission error- User did not select rating");
         exit($user_err_message);
-      } else if(strlen($evalComment) <= 0){
-        non_db_error("User: " . $login_name . " -evaluation submission error- User did enter a comment");
-        exit($user_err_message);
-      }
+      } 
+      // else if(strlen($evalComment) <= 0){
+      //   non_db_error("User: " . $login_name . " -evaluation submission error- User did enter a comment");
+      //   exit($user_err_message);
+      // }
 
       //insert eval into table
       $sqlInsert = <<<SQL
@@ -162,7 +163,7 @@ SQL;
             </div>
           <div class="form-group">
             <label for="evalComments">Comments</label>
-            <textarea class="form-control" id="evalComments" name="evalComments" placeholder="required" required></textarea>
+            <textarea class="form-control" id="evalComments" name="evalComments" ></textarea>
           </div>
           <input type="submit" class="btn btn-success" name="evaluate" />
         </form>
