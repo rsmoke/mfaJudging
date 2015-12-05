@@ -69,7 +69,28 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="row clearfix">
       <div class="col-md-12">
           <div>
-              <h4>Summary of Evaluations for The Academy of American Poets Prize</h4>
+          <?php $contestID = 11; ?>
+              <h4>Summary of Evaluations for 
+<?php
+$contestSelect = <<<SQL
+  SELECT name
+  FROM tbl_contest
+  JOIN lk_contests ON (lk_contests.id = tbl_contest.contestsID)
+  WHERE tbl_contest.id = $contestID
+SQL;
+
+    if (!$result = $db->query($contestSelect)) {
+        db_fatal_error($db->error, "data select issue", $sqlSelect);
+        exit($user_err_message);
+    }
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        echo $row['name'];
+      }
+    }
+?>
+
+</h4>
                 <a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
           </div>
 
@@ -78,18 +99,37 @@ if (session_status() == PHP_SESSION_NONE) {
           <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
            <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
            <div class="bg-warning infosection">
-           <strong>Ranking  Instructions:</strong> Select the top 10 entries from the list of applications you have evaluated.
+           <strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have evaluated. Using the 
+           dropdown menu next to each entry, select a ranking value (1-10) for that entry. You will only be selecting a ranking for the top ten entries.
 
            </div>
-<?php $rating = 3; $document = 4; ?>
           <table class="table table-hover">
             <thead>
-              <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors Pen-name</th><th>Division</th><th>Comment</th>
+              <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors Pen-name</th><th>Division</th><th>Rating Comment</th><th>Comment</th>
             </thead>
             <tbody>
-              <tr><td>
+            <?php
+            $getratings = <<<_SQL
+              SELECT teval.id AS evalid, teval.evaluator, teval.rating, teval.comment, teval.entry_id,
+               te.title, te.documentname, te.contestID, lcs.name AS contestname, lcat.name AS division, ta.penName
+              FROM tbl_evaluations AS teval
+              JOIN tbl_entry AS te ON (teval.`entry_id` = te.`id`)
+              JOIN `tbl_contest` AS tc ON (te.contestID = tc.id)
+              JOIN lk_contests AS lcs ON (tc.`contestsID` = lcs.id)
+              JOIN tbl_applicant AS ta ON (teval.entry_id = ta.id)
+              JOIN lk_category as lcat ON (te.`categoryID` = lcat.id)
+              WHERE teval.evaluator = '$login_name' AND te.contestID = $contestID
+              ORDER BY teval.rating DESC
+
+_SQL;
+$resultsInd = $db->query($getratings);
+if (!$resultsInd) {
+    echo "<tr><td>There are no entries available</td></tr>";
+} else {
+    while ($entry = $resultsInd->fetch_assoc()) {
+echo              '<tr><td>
                 <div class="form-group">
-                  <select class="form-control" id="rank_23">
+                  <select class="form-control" id="rank_' . $entry['entry_id'] . '" name="' . $entry['entry_id'] . '">
                     <option></option>
                     <option>1</option>
                     <option>2</option>
@@ -104,105 +144,25 @@ if (session_status() == PHP_SESSION_NONE) {
                   </select>
                 </div>
               </td><td>
-                <img src="img/<?php echo $rating; ?>star.png">
+                <img src="img/' . $entry['rating'] . 'star.png">
               </td><td>
-                Burning
+                ' . $entry['title'] . '
               </td><td>
-                <a href="contestfiles/<?php echo $document ?>" target="_blank"><span class="fa fa-book"></span></a>
+                <a href="contestfiles/' . $entry['documentname'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a>
               </td><td>
-                Bethany Rose
+                ' . $entry['penName'] . '
               </td><td>
-                poetry
+                ' . $entry['division'] . '
               </td><td>
-                <input type="text" class="form-control" id="summaryComment" name="summaryComment" />
-              </td></tr>
-              <tr><td>
-                <div class="form-group">
-                  <select class="form-control" id="rank_2">
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                  </select>
-                </div>
-              </td><td>
-                <img src="img/<?php echo $rating; ?>star.png">
-              </td><td>
-                Burning
-              </td><td>
-                <a href="contestfiles/<?php echo $document ?>" target="_blank"><span class="fa fa-book"></span></a>
-              </td><td>
-                Bethany Rose
-              </td><td>
-                poetry
+                ' . $entry['comment'] . '
               </td><td>
                 <input type="text" class="form-control" id="summaryComment" name="summaryComment" />
-              </td></tr>
-              <tr><td>
-                <div class="form-group">
-                  <select class="form-control" id="rank_204">
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                  </select>
-                </div>
-              </td><td>
-                <img src="img/<?php echo $rating; ?>star.png">
-              </td><td>
-                Burning
-              </td><td>
-                <a href="contestfiles/<?php echo $document ?>" target="_blank"><span class="fa fa-book"></span></a>
-              </td><td>
-                Bethany Rose
-              </td><td>
-                poetry
-              </td><td>
-                <input type="text" class="form-control" id="summaryComment" name="summaryComment" />
-              </td></tr>
-              <tr><td>
-                <div class="form-group">
-                  <select class="form-control" id="ranking">
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                  </select>
-                </div>
-              </td><td>
-                <img src="img/<?php echo $rating; ?>star.png">
-              </td><td>
-                Burning
-              </td><td>
-                <a href="contestfiles/<?php echo $document ?>" target="_blank"><span class="fa fa-book"></span></a>
-              </td><td>
-                Bethany Rose
-              </td><td>
-                poetry
-              </td><td>
-                <input type="text" class="form-control" id="summaryComment" name="summaryComment" />
-              </td></tr>
+              </td></tr>';
+    }
+}
+
+?>
+
             </tbody>
           </table>
 
