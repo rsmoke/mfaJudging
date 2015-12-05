@@ -146,8 +146,8 @@ SQL;
 
 ?>
         <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-         <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
-         <input type="hidden" name="entryid" value=" <?php echo  $entryid; ?> ">
+         <input type="hidden" name="evaluator" value="<?php echo  $login_name; ?>">
+         <input type="hidden" name="entryid" value="<?php echo  $entryid; ?>">
          <div class="bg-warning infosection">
          Both <strong>Rating</strong> and <strong>comments</strong> are required.
          </div>
