@@ -69,7 +69,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="row clearfix">
       <div class="col-md-12">
           <div>
-              <h4>Summary of Evaluation for The Academy of American Poets Prize</h4>
+              <h4>Summary of Evaluations for The Academy of American Poets Prize</h4>
                 <a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
           </div>
 
