@@ -7,7 +7,7 @@
     2) CSS each type of form element has a two part definition
         .invalid input:required:invalid
         .invalid input:required:valid
-    3) JS controls the class updating to show if the form fild is valid or invalid
+    3) JS controls the class updating to show if the form field is valid or invalid
 
     source:A PEN BY Ash Blue http://codepen.io/ashblue/pen/KyvmA;
 */
