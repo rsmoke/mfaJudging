@@ -161,12 +161,12 @@ if (!$results) {
 $sqlIndEntry = <<<SQL
    SELECT *
    FROM vw_entrydetail
-   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id`)
+   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
     WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
       SELECT DISTINCT name
       FROM `lk_category`
-      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)  
-      WHERE uniqname = '$login_name')
+      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
+      WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
 SQL;
 $resultsInd = $db->query($sqlIndEntry);
 if (!$resultsInd) {
