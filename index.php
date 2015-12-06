@@ -66,7 +66,7 @@ if ($resJudge->num_rows > 0) {
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
           <div class="container">
           <div class="navbar-header">
-             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><?php echo "$contestTitle";?><span style="color:#00FF80">-Judging</span></a>
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><?php echo "$contestTitle";?></a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -88,114 +88,39 @@ if ($resJudge->num_rows > 0) {
 
     <?php if ($isJudge) {
         ?>
-  <div class="container"><!-- container of all things -->
-
-<div id="contest">
-  <div class="row clearfix">
-    <div class="bg-warning infosection">
-    <h5 class="text-muted">Select an entry that you want to evaluate. Entries that 
-      you have evaluated will be disabled (greyed out).</h5><a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
-    </div>
-  </div>
-  <div class="row clearfix">
-    <div class="col-md-12">
-
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-<?php
-$sqlContestSelect = <<<SQL
-SELECT
-        DISTINCT `tbl_contest`.`id` AS ContestId,
-        `tbl_contest`.`date_closed`,
-        `tbl_contest`.`judgingOpen`,
-        `lk_contests`.`name`,
-        `lk_contests`.`freshmanEligible`,
-        `lk_contests`.`sophmoreEligible`,
-        `lk_contests`.`juniorEligible`,
-        `lk_contests`.`seniorEligible`,
-        `lk_contests`.`graduateEligible`,
-        `tbl_contestjudge`.`uniqname`
-    FROM tbl_contest
-    JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-    JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
-    WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`uniqname` = '$login_name'
-    ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
-SQL;
-
-$results = $db->query($sqlContestSelect);
-if (!$results) {
-    echo "There is no contest information available";
-} else {
-    $count = $i = 0;
-    while ($instance = $results->fetch_assoc()) {
-        $count = $i++;
-?>
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
-          <h6 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                <?php echo $instance['name'] . " <br /><small>closed: </small><span style='color:#0080FF'>" . date_format(date_create($instance['date_closed']),"F jS Y \a\\t g:ia") . "</span>" ?>
-            </a>
-          </h6>
-        </div>
-        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
-          <div class="panel-body">
-             <div class="well well-sm">Eligibility: 
-                <?php
-                echo($instance['freshmanEligible'])? "Fr " : "";
-                echo($instance['sophmoreEligible'])? "So " : "";
-                echo($instance['juniorEligible'])? "Jr " : "";
-                echo($instance['seniorEligible'])? "Sr " : "";
-                echo($instance['graduateEligible'])? "Grd " : "";
-                ?>
-             </div>
-             <div class="table-responsive">
-              <table class="table table-hover table-condensed">
-                <thead>
-                <tr>
-                  <th>Evaluate</th><th>Title</th><th>written by<br/><small>Pen Name</small></th><th>Manuscript Type</th><th>Date Entered</th><th>AppID</th>
-                  </tr>
-                </thead>
-                <tbody>
-<?php
-$sqlIndEntry = <<<SQL
-   SELECT *
-   FROM vw_entrydetail
-   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
-    WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
-      SELECT DISTINCT name
-      FROM `lk_category`
-      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
-      WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
-SQL;
-$resultsInd = $db->query($sqlIndEntry);
-if (!$resultsInd) {
-    echo "<tr><td>There are no applicants available</td></tr>";
-} else {
-    while ($entry = $resultsInd->fetch_assoc()) {
-      $disable = ($entry["rating"] && $entry['evaluator'] == $login_name)? "disabled" : "";
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"><span class="glyphicon glyphicon-list-alt"></span></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
-    }
-}
-
-?>
-  
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-<?php
-    }
-}
-?>
-    </div>
-    </div>
-  </div>
+<div class="container"><!-- container of all things -->
+<div class="jumbotron">
+  <h1>Judging Instructions</h1>
+  <p>Please read and understand the instructions below before submitting any evaluations.</p> 
+  <p>Do not hesite to ask questions
+  <ul class="list-inline">
+  <li>
+    <address>
+      <strong>Andrea Beauchamp</strong><br>
+      Assistant Director, Hopwood Awards Program<br>
+      <abbr title="eMail">e:</abbr><a href="mailto:abeauch@umich.edu">abeauch@umich.edu</a>
+    </address>
+  </li>
+  <li>
+    <address>
+      <strong>Rick Smoke</strong><br>
+      Application Architect, LSA-<abbr title="Management Information Systems">MIS</abbr><br>
+      <abbr title="eMail">e:</abbr><a href="mailto:rsmoke@umich.edu">rsmoke@umich.edu</a>
+    </address>
+  </li>
+  </p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 </div>
 
-    <?php
+  <div class="row clearfix">
+    <div id="instructions">
+      <div class="bg-warning infosection">
+      <h5 class="text-muted">Instructions</h5><a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
+      </div>
+    </div>
+  </div>
+
+<?php
 } else {
 ?>
 
