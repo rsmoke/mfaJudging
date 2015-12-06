@@ -138,7 +138,7 @@ if (!$results) {
             </a>
           </h6>
         </div>
-        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
           <div class="panel-body">
              <div class="well well-sm">Eligibility: 
                 <?php
