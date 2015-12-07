@@ -16,9 +16,15 @@ if (session_status() == PHP_SESSION_NONE) {
 
       if ($key != "summarize"){
         if (substr($key,0,4) == "entr"){
-          $resultset .= "('" . $login_name . "'," . $value . ",";
+          $resultset .= "('" . $login_name . "'," . $db->real_escape_string(htmlspecialchars($value)) . ",";
+        } elseif (substr($key,0,4) == "cont"){
+          $resultset .= $db->real_escape_string(htmlspecialchars($value)) . ",";
         } elseif (substr($key,0,4) == "rank"){
-          $resultset .= $value . ",";
+          if ($value > 0){
+            $resultset .= $db->real_escape_string(htmlspecialchars($value)) . ",";
+          } else {
+            $resultset .= "0,";
+          }
         } elseif (substr($key,0,4) == "summ"){
           $resultset .= "'" . $db->real_escape_string(htmlspecialchars($value)) . "'),";
         }
@@ -30,11 +36,13 @@ if (session_status() == PHP_SESSION_NONE) {
         INSERT INTO `quilleng_ContestManager`.`tbl_ranking`
         (`rankedby`,
         `entryid`,
+        `contestID`,
         `rank`,
         `comment`)
         VALUES
         $insertValues
 SQL;
+echo $sqlInsert;
         if (!$result = $db->query($sqlInsert)) {
               db_fatal_error($db->error, $login_name . " -data insert issue- " . $sqlInsert);
               exit($user_err_message);
@@ -180,6 +188,7 @@ if (!$resultsInd = $db->query($getratings)) {
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
 echo         '<input type="hidden" name="entryID_' . $entry['entry_id'] . '" value="' . $entry['entry_id'] . '">
+              <input type="hidden" name="contestID_' . $entry['entry_id'] . '" value="' . $contestID . '">
               <tr><td>
                 <div class="form-group">
                   <select class="form-control" id="rank_' . $entry['entry_id'] . '" name="rank_' . $entry['entry_id'] . '">
