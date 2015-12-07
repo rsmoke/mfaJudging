@@ -4,20 +4,57 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-  if (isset($_GET["ctst"])){
-      $contestID = htmlspecialchars(($_GET["ctst"]));
-  } else {
-    non_db_error("User: " . $login_name . " -ranking page access error- variable ctst= " . $_GET["ctst"]);
-    exit($user_err_message);
-  }
-
 
   if (isset($_POST["summarize"])) {
       if ($_SESSION["isJudge"]){
+    //gather all ten entries and build an insert query
+    //scrub inputs
 
-  }else{
+    $responses = $_POST;
+    $resultset = "";
+    foreach ($responses as $key => $value ){
 
+      if ($key != "summarize"){
+        if (substr($key,0,4) == "entr"){
+          $resultset .= "('" . $login_name . "'," . $value . ",";
+        } elseif (substr($key,0,4) == "rank"){
+          $resultset .= $value . ",";
+        } elseif (substr($key,0,4) == "summ"){
+          $resultset .= "'" . $db->real_escape_string(htmlspecialchars($value)) . "'),";
+        }
       }
+    }
+    $insertValues = trim($resultset,",");
+
+    $sqlInsert = <<<SQL
+        INSERT INTO `quilleng_ContestManager`.`tbl_ranking`
+        (`rankedby`,
+        `entryid`,
+        `rank`,
+        `comment`)
+        VALUES
+        $insertValues
+SQL;
+        if (!$result = $db->query($sqlInsert)) {
+              db_fatal_error($db->error, $login_name . " -data insert issue- " . $sqlInsert);
+              exit($user_err_message);
+        } else {
+            $db->close();
+            unset($_POST['summarize']);
+            safeRedirect('rating.php');
+            exit();
+        }
+      }else{
+        non_db_error("User: " . $login_name . " -ranking submission error- isJudge set to: " . $_SESSION["isJudge"] );
+      }
+  }
+
+  if (isset($_GET["ctst"])){
+      $contestID = htmlspecialchars(($_GET["ctst"]));
+  } else {
+    $contestID = "Variable ctst Not sent!";
+    non_db_error("User: " . $login_name . " -ranking page access error- variable ctst= " . $contestID);
+    exit($user_err_message);
   }
 
   ?>
@@ -112,7 +149,6 @@ SQL;
            <hr>
 
           <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-           <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
 
           <table class="table table-hover">
             <thead>
@@ -143,9 +179,10 @@ if (!$resultsInd = $db->query($getratings)) {
     echo "<tr><td>There are no rated entries available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-echo              '<tr><td>
+echo         '<input type="hidden" name="entryID_' . $entry['entry_id'] . '" value="' . $entry['entry_id'] . '">
+              <tr><td>
                 <div class="form-group">
-                  <select class="form-control" id="rank_' . $entry['entry_id'] . '" name="' . $entry['entry_id'] . '">
+                  <select class="form-control" id="rank_' . $entry['entry_id'] . '" name="rank_' . $entry['entry_id'] . '">
                     <option></option>
                     <option>1</option>
                     <option>2</option>
@@ -172,7 +209,9 @@ echo              '<tr><td>
               </td><td>
                 ' . $entry['comment'] . '
               </td><td>
-                <input type="text" class="form-control" id="summaryComment" name="summaryComment" />
+                <textarea class="form-control" id="summaryComment" name="summaryComment_' .$entry['entry_id'] . '" ></textarea>
+              </td><td>
+                <small>' . $entry['entry_id'] . '</small>
               </td></tr>';
     }
 }
