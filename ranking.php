@@ -92,11 +92,11 @@ SQL;
 
 </h4>
       <div class="bg-warning infosection">
-           <strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have rated. Using the 
-           dropdown menu next to each entry, select a ranking value (1-10) for that entry. You will only be selecting a ranking for the top ten entries.<br>
+           <p><strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have rated. Using the 
+           dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting a ranking for the top ten entries.<br>
            <em>NOTE: Each time you select a number it will no longer be available to be selected from the dropdown list. If you want to set and entry to 
-            an already used ranking number, you must first set the entry that currently has the rank you want to use to the empty item at the top of list.
-            You will then be able to set the entry you wanted with the 'freed' ranking value. </em><br>
+            an already used ranking number, you must first set the entry that currently has the rank you want to use to the empty item at the top of the dropdown list.
+            You will then be able to set the entry you wanted with the 'freed' ranking value. </em></p>
 
         <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
 

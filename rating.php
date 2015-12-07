@@ -93,8 +93,8 @@ if (session_status() == PHP_SESSION_NONE) {
 <div id="contest">
   <div class="row clearfix">
     <div class="bg-warning infosection">
-    <h5 class="text-muted">Select an entry that you want to evaluate. Entries that 
-      you have evaluated will be disabled (greyed out).</h5><a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
+    <p>Select an entry that you want to evaluate. Entries that
+      you have evaluated will be disabled (greyed out).</p><a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
     </div>
   </div>
   <div class="row clearfix">
@@ -153,7 +153,7 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Evaluate</th><th>Title</th><th>written by<br/><small>Pen Name</small></th><th>Manuscript Type</th><th>Date Entered</th><th>AppID</th>
+                  <th>Rate</th><th>Title</th><th>written by<br/><small>Pen Name</small></th><th>Manuscript Type</th><th>Date Entered</th><th>AppID</th>
                   </tr>
                 </thead>
                 <tbody>

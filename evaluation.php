@@ -127,8 +127,8 @@ SQL;
   <div class="row clearfix">
     <div class="col-md-12">
         <div>
-            <h1>Evaluation</h1>
-              <a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
+            <h1>Entry Rating</h1>
+              <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
         </div>
 
          <hr>
@@ -148,10 +148,9 @@ SQL;
         <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
          <input type="hidden" name="evaluator" value="<?php echo  $login_name; ?>">
          <input type="hidden" name="entryid" value="<?php echo  $entryid; ?>">
-         <div class="bg-warning infosection">
+         <div >
          <span class="bg-danger">A <strong>Rating</strong> is required.</span>
          </div>
-            <strong>Rating</strong>
             <div class="star-rating">
               <fieldset>
                 <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="Outstanding">5 stars</label>
