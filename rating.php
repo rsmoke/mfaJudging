@@ -137,6 +137,7 @@ if (!$results) {
                 <?php echo $instance['name'] . " <br /><small>closed: </small><span style='color:#0080FF'>" . date_format(date_create($instance['date_closed']),"F jS Y \a\\t g:ia") . "</span>" ?>
             </a>
           </h6>
+          <?php echo '<div class="ranking pull-right"> <button class="fa fa-sort-numeric-asc btn btn-success btn-contestid" data-contestid="' . $instance['ContestId'] . '"> Ranking</button></div>' ?>
         </div>
         <div id="collapse<?php echo $count ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
           <div class="panel-body">
@@ -153,7 +154,7 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rate</th><th>Title</th><th>written by<br/><small>Pen Name</small></th><th>Manuscript Type</th><th>Date Entered</th><th>AppID</th>
+                  <th>Rate</th><th>Title</th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th>Date Entered</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -179,7 +180,6 @@ if (!$resultsInd) {
 }
 
 ?>
-  
                 </tbody>
               </table>
             </div>

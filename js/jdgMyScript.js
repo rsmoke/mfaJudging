@@ -4,6 +4,11 @@ $( document ).ready(function(){
     document.location = 'evaluation.php?evid=' + entryid;
   });
 
+  $('#contest').on('click', '.btn-contestid', function (e){
+    var contestid = $(this).data('contestid');
+    document.location = 'ranking.php?ctst=' + contestid;
+  });
+
 
 });
 

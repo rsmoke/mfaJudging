@@ -4,6 +4,13 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+  if (isset($_GET["ctst"])){
+      $contestID = htmlspecialchars(($_GET["ctst"]));
+  } else {
+    non_db_error("User: " . $login_name . " -ranking page access error- variable ctst= " . $_GET["ctst"]);
+    exit($user_err_message);
+  }
+
 
   if (isset($_POST["summarize"])) {
       if ($_SESSION["isJudge"]){
@@ -69,7 +76,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="row clearfix">
       <div class="col-md-12">
           <div>
-          <?php $contestID = 11; ?>
               <h4>Summary of Evaluations for 
 <?php
 $contestSelect = <<<SQL
@@ -110,7 +116,7 @@ SQL;
 
           <table class="table table-hover">
             <thead>
-              <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors Pen-name</th><th>Division</th><th>Rating Comment</th><th>Comment</th>
+              <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Rating Comment</th><th>Comment</th>
             </thead>
             <tbody>
             <?php
@@ -127,9 +133,14 @@ SQL;
               ORDER BY teval.rating DESC
 
 _SQL;
-$resultsInd = $db->query($getratings);
-if (!$resultsInd) {
-    echo "<tr><td>There are no entries available</td></tr>";
+//$resultsInd = $db->query($getratings);
+//if (!$resultsInd) {
+if (!$resultsInd = $db->query($getratings)) {
+        db_fatal_error($db->error, "data select issue", $getratings);
+        exit($user_err_message);
+    }
+    if ($resultsInd->num_rows <= 0) {
+    echo "<tr><td>There are no rated entries available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
 echo              '<tr><td>
