@@ -104,18 +104,16 @@ if ($resJudge->num_rows > 0) {
       give, what you consider to be the top 10 entries, a ranking with the best ranked as #1. You are able to leave a commment 
       in the ranking section. This stage can be accessed by selecting the 
       <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a> button at the top of the entry
-      rating list for each contest.
-      contest </li>
+      rating list for each contest.</li>
     </ol>
-    <div class="btn-toolbar">
+    
       <div class="btn-group" role="group" aria-label="button group">
         <a class="btn btn-primary fa fa-star" href="rating.php" role="button"> Rating</a>
-        <a class="fa fa-sort-numeric-asc btn btn-success " href="ranking.php" role="button"> Ranking</a>
       </div>
       <div class="btn-group" role="group" aria-label="button group">
         <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
       </div>
-    </div>
+    
   </p>
   <p>
     The following is a list of the icons that you will see throughout the application
