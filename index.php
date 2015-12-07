@@ -44,7 +44,7 @@ if ($resJudge->num_rows > 0) {
 
   <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/normalize.css" media="all">
   <link rel="stylesheet" href="css/default.css" media="all">
 
@@ -91,7 +91,36 @@ if ($resJudge->num_rows > 0) {
 <div class="container"><!-- container of all things -->
 <div class="jumbotron">
   <h1>Judging Instructions</h1>
-  <p>Please read and understand the instructions below before submitting any evaluations.</p> 
+  <p class="bg-warning">Please read and understand the instructions below before submitting any evaluations.</p>
+  <p>
+    There are two stages to the evaluation process.
+    <ol>
+      <li>The first stage is reading the entries and giving them a rating from 1 to 5 stars. You are also 
+      able to write a comment about the entry and save it with the rating. You need to provide a rating for all entries 
+      in the contest area you have been assigned. Only rated entries will move for forward to the ranking stage. This 
+      stage can be accessed by selecting the <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Rating</a></li>
+      <li>The second stage of the judging process is ranking the entries that you rated in the previous step. You will
+      see a list of all the entries for a given contest sorted by the top rated down to the lowest rated entry. You will
+      give, what you consider to be the top 10 entries, a ranking with the best ranked as #1. You are able to leave a commment 
+      in the ranking section.This stage can be accessed by selecting the <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a></li>
+    </ol>
+    <div class="btn-toolbar">
+      <div class="btn-group" role="group" aria-label="button group">
+        <a class="btn btn-primary fa fa-star" href="rating.php" role="button"> Rating</a>
+        <a class="fa fa-sort-numeric-asc btn btn-success " href="ranking.php" role="button"> Ranking</a>
+      </div>
+      <div class="btn-group" role="group" aria-label="button group">
+        <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
+      </div>
+    </div>
+  </p>
+  <p>
+    The following is a list of the icons that you will see throughout the application
+    <ul>
+      <li><span class="fa fa-book disabled"></span> the link to the reading associated with a particular entry</li>
+    </ul>
+  </p>
+
   <p>Do not hesite to ask questions
   <ul class="list-inline">
   <li>
@@ -101,6 +130,7 @@ if ($resJudge->num_rows > 0) {
       <abbr title="eMail">e:</abbr><a href="mailto:abeauch@umich.edu">abeauch@umich.edu</a>
     </address>
   </li>
+  <li></li>
   <li>
     <address>
       <strong>Rick Smoke</strong><br>
@@ -108,17 +138,9 @@ if ($resJudge->num_rows > 0) {
       <abbr title="eMail">e:</abbr><a href="mailto:rsmoke@umich.edu">rsmoke@umich.edu</a>
     </address>
   </li>
+  </ul>
   </p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 </div>
-
-  <div class="row clearfix">
-    <div id="instructions">
-      <div class="bg-warning infosection">
-      <h5 class="text-muted">Instructions</h5><a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
-      </div>
-    </div>
-  </div>
 
 <?php
 } else {

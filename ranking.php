@@ -91,18 +91,23 @@ SQL;
 ?>
 
 </h4>
-                <a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
-          </div>
+      <div class="bg-warning infosection">
+           <strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have rated. Using the 
+           dropdown menu next to each entry, select a ranking value (1-10) for that entry. You will only be selecting a ranking for the top ten entries.<br>
+           <em>NOTE: Each time you select a number it will no longer be available to be selected from the dropdown list. If you want to set and entry to 
+            an already used ranking number, you must first set the entry that currently has the rank you want to use to the empty item at the top of list.
+            You will then be able to set the entry you wanted with the 'freed' ranking value. </em><br>
+
+        <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
+
+      </div>
+    </div>
 
            <hr>
 
           <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
            <input type="hidden" name="evaluator" value=" <?php echo  $login_name; ?> ">
-           <div class="bg-warning infosection">
-           <strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have evaluated. Using the 
-           dropdown menu next to each entry, select a ranking value (1-10) for that entry. You will only be selecting a ranking for the top ten entries.
 
-           </div>
           <table class="table table-hover">
             <thead>
               <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors Pen-name</th><th>Division</th><th>Rating Comment</th><th>Comment</th>

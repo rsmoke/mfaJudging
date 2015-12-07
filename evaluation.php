@@ -149,7 +149,7 @@ SQL;
          <input type="hidden" name="evaluator" value="<?php echo  $login_name; ?>">
          <input type="hidden" name="entryid" value="<?php echo  $entryid; ?>">
          <div class="bg-warning infosection">
-         Both <strong>Rating</strong> and <strong>comments</strong> are required.
+         <span class="bg-danger">A <strong>Rating</strong> is required.</span>
          </div>
             <strong>Rating</strong>
             <div class="star-rating">

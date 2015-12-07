@@ -44,7 +44,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
   <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/normalize.css" media="all">
   <link rel="stylesheet" href="css/default.css" media="all">
 
@@ -59,7 +59,7 @@ if (session_status() == PHP_SESSION_NONE) {
         -moz-appearance:textfield;
     }
   </style>
-  <base href=<?php echo URL ?>>
+  <base href=$URLS>
 </head>
 
 <body>
@@ -86,7 +86,7 @@ if (session_status() == PHP_SESSION_NONE) {
           </div>
         </nav>
 
-    <?php if ($isJudge) {
+    <?php if ($_SESSION["isJudge"]) {
         ?>
   <div class="container"><!-- container of all things -->
 
@@ -94,7 +94,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <div class="row clearfix">
     <div class="bg-warning infosection">
     <h5 class="text-muted">Select an entry that you want to evaluate. Entries that 
-      you have evaluated will be disabled (greyed out).</h5><a class="btn btn-xs btn-warning" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank">Contest Rules</a>
+      you have evaluated will be disabled (greyed out).</h5><a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
     </div>
   </div>
   <div class="row clearfix">
@@ -174,7 +174,7 @@ if (!$resultsInd) {
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
       $disable = ($entry["rating"] && $entry['evaluator'] == $login_name)? "disabled" : "";
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"><span class="glyphicon glyphicon-list-alt"></span></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-star ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
@@ -227,6 +227,9 @@ if (!$resultsInd) {
     include("footer.php");?>
     <!-- //additional script specific to this page -->
       <script src="js/jdgMyScript.js"></script>
+      <script type="text/javascript">
+        $('.disabled').toggleClass("btn-info");
+      </script>
 </div><!-- End Container of all things -->
 </body>
 </html>

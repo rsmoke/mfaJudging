@@ -4,7 +4,6 @@ $( document ).ready(function(){
     document.location = 'evaluation.php?evid=' + entryid;
   });
 
-  $('.disabled').toggleClass("btn-info");
 
 });
 
