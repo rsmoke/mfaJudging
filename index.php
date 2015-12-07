@@ -97,12 +97,12 @@ if ($resJudge->num_rows > 0) {
     <ol>
       <li>The first stage is reading the entries and giving them a rating from 1 to 5 stars. You are also 
       able to write a comment about the entry and save it with the rating. You need to provide a rating for all entries 
-      in the contest area you have been assigned. Only rated entries will move for forward to the ranking stage. This 
-      stage can be accessed by selecting the <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Rating</a></li>
+      in the contest area you have been assigned. <u>Only rated entries will move forward to the ranking stage.</u> This 
+      stage can be accessed by selecting <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Rating</a> below.</li>
       <li>The second stage of the judging process is ranking the entries that you rated in the previous step. You will
       see a list of all the entries for a given contest sorted by the top rated down to the lowest rated entry. You will
       give, what you consider to be the top 10 entries, a ranking with the best ranked as #1. You are able to leave a commment 
-      in the ranking section.This stage can be accessed by selecting the <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a></li>
+      in the ranking section.This stage can be accessed by selecting <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a> below.</li>
     </ol>
     <div class="btn-toolbar">
       <div class="btn-group" role="group" aria-label="button group">
