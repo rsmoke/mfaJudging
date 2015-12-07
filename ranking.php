@@ -127,7 +127,7 @@ SQL;
               JOIN tbl_entry AS te ON (teval.`entry_id` = te.`id`)
               JOIN `tbl_contest` AS tc ON (te.contestID = tc.id)
               JOIN lk_contests AS lcs ON (tc.`contestsID` = lcs.id)
-              JOIN tbl_applicant AS ta ON (teval.entry_id = ta.id)
+              JOIN tbl_applicant AS ta ON (te.`applicantID` = ta.id)
               JOIN lk_category as lcat ON (te.`categoryID` = lcat.id)
               WHERE teval.evaluator = '$login_name' AND te.contestID = $contestID
               ORDER BY teval.rating DESC
