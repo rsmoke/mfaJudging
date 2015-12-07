@@ -164,7 +164,7 @@ SQL;
             <label for="evalComments">Comments</label>
             <textarea class="form-control" id="evalComments" name="evalComments" ></textarea>
           </div>
-          <input type="submit" class="btn btn-success" name="evaluate" />
+          <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
         </form>
         <p>Status: <span id="status">Unsubmitted</span></p>
 <?php

@@ -98,11 +98,11 @@ SQL;
 
 </h4>
       <div class="bg-warning infosection">
-           <p><strong>Ranking  Instructions:</strong> You are asked to select the top 10 entries from the list of applications you have rated. Using the 
-           dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting a ranking for the top ten entries.<br>
-           <em>NOTE: Each time you select a number it will no longer be available to be selected from the dropdown list. If you want to set and entry to 
-            an already used ranking number, you must first set the entry that currently has the rank you want to use to the empty item at the top of the dropdown list.
-            You will then be able to set the entry you wanted with the 'freed' ranking value. </em></p>
+           <p><strong>Ranking  Instructions:</strong> Please select the top 10 entries from the list of applications you have rated. Using the
+           dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting
+           a ranking for the top ten entries.</p>
+           <p><em>NOTE: Each time you select a number it will no longer be available from the dropdown list. If you want to use a rank value that is already on another entry
+           you will need to remove the value from the other entry first. </em></p>
 
         <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
 
@@ -181,7 +181,7 @@ echo              '<tr><td>
 
             </tbody>
           </table>
-
+          <input type="submit" class="btn btn-success" name="summarize" value="Submit"/>
           </form>
           <p>Status: <span id="status">Unsubmitted</span></p>
 <?php

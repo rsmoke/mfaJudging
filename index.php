@@ -102,7 +102,10 @@ if ($resJudge->num_rows > 0) {
       <li>The second stage of the judging process is ranking the entries that you rated in the previous step. You will
       see a list of all the entries for a given contest sorted by the top rated down to the lowest rated entry. You will
       give, what you consider to be the top 10 entries, a ranking with the best ranked as #1. You are able to leave a commment 
-      in the ranking section. This stage can be accessed by selecting <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a></li>
+      in the ranking section. This stage can be accessed by selecting the 
+      <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a> button at the top of the entry
+      rating list for each contest.
+      contest </li>
     </ol>
     <div class="btn-toolbar">
       <div class="btn-group" role="group" aria-label="button group">
@@ -121,7 +124,8 @@ if ($resJudge->num_rows > 0) {
     </ul>
   </p>
 
-  <p>Do not hesite to ask questions
+<div class="bg-info">
+  <p >This is the first round of judging using an online system so do not hesite to ask questions or offer comments.
   <ul class="list-inline">
   <li>
     <address>
@@ -140,6 +144,7 @@ if ($resJudge->num_rows > 0) {
   </li>
   </ul>
   </p>
+  </div>
 </div>
 
 <?php
