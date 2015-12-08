@@ -155,9 +155,10 @@ SQL;
       if ($resultsSel->num_rows > 0) {
 ?>
     <div class="bg-info">
-      You are done with the rankings for this contest. Below is a summary of the ratings and rankings you submitted.
+      <h5>You are done with the rankings for this contest.</h5> <p>Below is a summary of all the ratings and rankings you submitted. The greenbox contains
+      the entries that ranked as being in the top ten.</p>
     </div>
-        <table class="table table-hover">
+        <table class="table table-hover bg-success">
           <thead>
             <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Rating Comment</th><th>Ranking Comment</th>
           </thead>
