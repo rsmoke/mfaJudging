@@ -121,7 +121,7 @@ echo $sqlInsert;
     <div class="row clearfix">
       <div class="col-md-12">
           <div>
-              <h4>Summary of Evaluations for 
+              <h4>Summary of Evaluations for
 <?php
 $contestSelect = <<<SQL
   SELECT name
@@ -142,6 +142,109 @@ SQL;
 ?>
 
 </h4>
+<?php
+$checkforranking = <<< SQL
+  SELECT DISTINCT contestID
+  FROM tbl_ranking
+  WHERE rankedby = '$login_name' AND contestID = $contestID
+SQL;
+  if (!$resultsSel = $db->query($checkforranking)) {
+          db_fatal_error($db->error, "data select issue", $checkforranking);
+          exit($user_err_message);
+      }
+      if ($resultsSel->num_rows > 0) {
+?>
+    <div class="bg-info">
+      You are done with the rankings for this contest. Below is a summary of the ratings and rankings you submitted.
+    </div>
+        <table class="table table-hover">
+          <thead>
+            <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Rating Comment</th><th>Ranking Comment</th>
+          </thead>
+          <tbody>
+          <?php
+      $getRankings = <<<SQL
+              SELECT teval.id AS evalid, teval.evaluator, teval.rating, tr.rank, teval.comment, tr.comment AS rankcomment, teval.entry_id,
+               te.title, te.documentname, te.contestID, lcs.name AS contestname, lcat.name AS division, ta.penName
+              FROM tbl_evaluations AS teval
+              JOIN tbl_entry AS te ON (teval.`entry_id` = te.`id`)
+              JOIN `tbl_contest` AS tc ON (te.contestID = tc.id)
+              JOIN lk_contests AS lcs ON (tc.`contestsID` = lcs.id)
+              JOIN tbl_applicant AS ta ON (te.`applicantID` = ta.id)
+              JOIN lk_category as lcat ON (te.`categoryID` = lcat.id)
+              JOIN tbl_ranking AS tr ON (teval.`entry_id` = tr.entryid)
+              WHERE teval.evaluator = '$login_name' AND te.contestID = $contestID
+              ORDER BY tr.rank ASC
+
+SQL;
+if (!$resultsSel = $db->query($getRankings)) {
+        db_fatal_error($db->error, "data select issue", $getRankings);
+        exit($user_err_message);
+    }
+    if ($resultsSel->num_rows > 0) {
+    while ($entry = $resultsSel->fetch_assoc()) {
+      if ($entry['rank'] > 0){
+      echo  '<tr><td>
+                ' . $entry['rank'] . '
+              </td><td>
+                <img src="img/' . $entry['rating'] . 'star.png">
+              </td><td>
+                ' . $entry['title'] . '
+              </td><td>
+                <a href="contestfiles/' . $entry['documentname'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a>
+              </td><td>
+                ' . $entry['penName'] . '
+              </td><td>
+                ' . $entry['division'] . '
+              </td><td>
+                ' . $entry['comment'] . '
+              </td><td>
+                ' . $entry['rankcomment'] . '
+              </td><td>
+                <small>' . $entry['entry_id'] . '</small>
+              </td></tr>';
+      }
+    }
+    echo '</tbody></table>';
+  }
+
+if (!$resultsSel = $db->query($getRankings)) {
+        db_fatal_error($db->error, "data select issue", $getRankings);
+        exit($user_err_message);
+    }
+    if ($resultsSel->num_rows > 0) {
+      echo '<table class="table table-hover">
+            <thead>
+            <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Rating Comment</th><th>Ranking Comment</th>
+          </thead>
+          <tbody>';
+    while ($entry = $resultsSel->fetch_assoc()) {
+      if ($entry['rank'] == 0){
+      echo  '<tr><td>
+                ' . $entry['rank'] . '
+              </td><td>
+                <img src="img/' . $entry['rating'] . 'star.png">
+              </td><td>
+                ' . $entry['title'] . '
+              </td><td>
+                <a href="contestfiles/' . $entry['documentname'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a>
+              </td><td>
+                ' . $entry['penName'] . '
+              </td><td>
+                ' . $entry['division'] . '
+              </td><td>
+                ' . $entry['comment'] . '
+              </td><td>
+                ' . $entry['rankcomment'] . '
+              </td><td>
+                <small>' . $entry['entry_id'] . '</small>
+              </td></tr>';
+      }
+    }
+          echo '</tbody></table>';
+  }
+      } else {
+?>
       <div class="bg-warning infosection">
            <p><strong>Ranking  Instructions:</strong> Please select the top 10 entries from the list of applications you have rated. Using the
            dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting
@@ -233,6 +336,7 @@ echo         '<input type="hidden" name="entryID_' . $entry['entry_id'] . '" val
           </form>
           <p>Status: <span id="status">Unsubmitted</span></p>
 <?php
+    }
       } else {
 ?>
 
