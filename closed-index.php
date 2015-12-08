@@ -44,7 +44,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
 <body>
 
   <div>
-    <h1 class="text-center">The Judging sectio of the Hopwood writing contests is currently not available.<br>Please
+    <h1 class="text-center">The Judging section of the Hopwood writing contests is currently not available.<br>Please
     check back.</h1>
   </div>
 <footer>
