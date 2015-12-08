@@ -5,7 +5,7 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 141.211.5.187 (MySQL 5.5.46-cll)
+# (MySQL 5.5.46-cll)
 # Database: quilleng_ContestManager
 # Generation Time: 2015-12-08 13:31:42 +0000
 # ************************************************************
@@ -378,7 +378,7 @@ CREATE TABLE `vw_kitchensink` (
 
 DROP TABLE `vw_entrydetail_with_applicantdetail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_entrydetail_with_applicantdetail`
+CREATE VIEW `vw_entrydetail_with_applicantdetail`
 AS SELECT
    `tbl_applicant`.`uniqname` AS `uniqname`,concat(`tbl_applicant`.`userFname`,' ',`tbl_applicant`.`userLname`) AS `Name`,concat(`tbl_applicant`.`streetL`,', ',`tbl_applicant`.`cityL`,', ',`tbl_applicant`.`stateL`,' ',`tbl_applicant`.`zipL`) AS `Local_Address`,concat(`tbl_applicant`.`streetH`,', ',`tbl_applicant`.`cityH`,', ',`tbl_applicant`.`stateH`,' ',`tbl_applicant`.`zipH`) AS `Home_Address`,concat(`tbl_applicant`.`gradYearMonth`,' ',`tbl_applicant`.`school`,' ',`tbl_applicant`.`major`) AS `Degree/College`,
    `tbl_entry`.`title` AS `manuscript_title`,
@@ -393,7 +393,7 @@ FROM ((((`tbl_entry` join `tbl_applicant` on((`tbl_entry`.`applicantID` = `tbl_a
 
 DROP TABLE `vw_kitchensink`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_kitchensink`
+CREATE VIEW `vw_kitchensink`
 AS SELECT
    concat(`tbl_applicant`.`uniqname`,'@umich.edu') AS `uniqname`,
    `tbl_applicant`.`umid` AS `UMid`,concat(`tbl_applicant`.`userFname`,' ',`tbl_applicant`.`userLname`) AS `Name`,concat(`tbl_applicant`.`streetL`,', ',`tbl_applicant`.`cityL`,', ',`tbl_applicant`.`stateL`,' ',`tbl_applicant`.`zipL`) AS `Local_Address`,concat(`tbl_applicant`.`streetH`,', ',`tbl_applicant`.`cityH`,', ',`tbl_applicant`.`stateH`,' ',`tbl_applicant`.`zipH`) AS `Home_Address`,(case `tbl_applicant`.`classLevel` when 9 then 'Freshman' when 10 then 'Sophmore' when 11 then 'Junior' when 12 then 'Senior' else 'Graduate' end) AS `ClassLevel`,concat(`tbl_applicant`.`gradYearMonth`,' ',`tbl_applicant`.`school`,' ',`tbl_applicant`.`major`,' ',`tbl_applicant`.`department`) AS `Grad_Yr-Mo/School/Dept/Major`,(case `tbl_applicant`.`finAid` when 1 then 'Yes' else ' ' end) AS `Financial Aid`,
@@ -412,7 +412,7 @@ FROM ((((`tbl_entry` join `tbl_applicant` on((`tbl_entry`.`applicantID` = `tbl_a
 
 DROP TABLE `vw_conteststocategory`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_conteststocategory`
+CREATE VIEW `vw_conteststocategory`
 AS SELECT
    `C2C`.`contestsID` AS `contestsID`,
    `C2C`.`categoryID` AS `categoryID`,
@@ -426,7 +426,7 @@ FROM ((`link_contestsTocategory` `C2C` join `lk_category` `C1` on((`C2C`.`catego
 
 DROP TABLE `vw_entrydetail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_entrydetail`
+CREATE VIEW `vw_entrydetail`
 AS SELECT
    `tbl_entry`.`id` AS `EntryId`,
    `tbl_entry`.`title` AS `title`,
@@ -450,7 +450,7 @@ FROM ((((`tbl_entry` join `tbl_applicant` on((`tbl_entry`.`applicantID` = `tbl_a
 
 DROP TABLE `vw_contestlistingfuturedated`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_contestlistingfuturedated`
+CREATE VIEW `vw_contestlistingfuturedated`
 AS SELECT
    `tbl_contest`.`id` AS `contestid`,
    `tbl_contest`.`contestsID` AS `id`,
@@ -472,7 +472,7 @@ FROM (`tbl_contest` join `lk_contests` on((`tbl_contest`.`contestsID` = `lk_cont
 
 DROP TABLE `vw_contestlisting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`quilleng_sUser`@`141.211.136.42` SQL SECURITY DEFINER VIEW `vw_contestlisting`
+CREATE VIEW `vw_contestlisting`
 AS SELECT
    `tbl_contest`.`id` AS `contestid`,
    `tbl_contest`.`contestsID` AS `id`,
