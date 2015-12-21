@@ -173,7 +173,7 @@ SQL;
               JOIN lk_contests AS lcs ON (tc.`contestsID` = lcs.id)
               JOIN tbl_applicant AS ta ON (te.`applicantID` = ta.id)
               JOIN lk_category as lcat ON (te.`categoryID` = lcat.id)
-              JOIN tbl_ranking AS tr ON (teval.`entry_id` = tr.entryid)
+              JOIN tbl_ranking AS tr ON (teval.`entry_id` = tr.entryid AND tr.`rankedby` = '$login_name')
               WHERE teval.evaluator = '$login_name' AND te.contestID = $contestID
               ORDER BY tr.rank ASC
 
