@@ -15,29 +15,49 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
   <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
   <meta name="author" content="LSA-MIS_rsmoke">
   <link rel="icon" href="img/favicon.ico">
-  <style>
-    html { 
-    background: url(img/evaluateImage.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/evaluateImage.jpg', sizingMethod='scale');
-    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/HopwoodArt.jpg', sizingMethod='scale')";
-  }
-  .text-center {
-      color: black;
-      font-weight: bold;
-      text-align: center;
-  }
-  footer {
+  <style type="text/css">
+    html {
+      background: url(img/evaluateImage.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/evaluateImage.jpg', sizingMethod='scale');
+      -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/evaluateImage.jpg', sizingMethod='scale')";
+    }
+
+    .text-center {
+        color: black;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    footer {
       position: fixed;
-      bottom: 10px;
+      bottom: 100px;
+      width: 130%;
+    }
+
+    address {
+      text-shadow: 0px 1px 0px rgb(204, 204, 204), 0px 2px 0px rgb(201, 201, 201), 0px 3px 0px rgb(187, 187, 187), 0px 4px 0px rgb(185, 185, 185), 0px 5px 0px rgb(170, 170, 170), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 5px 10px rgba(0, 0, 0, 0.25), 0px 20px 20px rgba(0, 0, 0, 0.15);
+      color: rgb(51, 51, 51);
+      font-family: 'League Gothic', Impact, sans-serif;
+      line-height: 1.2em;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin: 1em auto;
+      text-align: center;
+      font-size: .8rem;
+
+    }
+
+    #copyright {
+      margin-left: -8px;
+      background-color: #CCCCCC;
+      position: fixed;
+      bottom: 0px;
       width: 100%;
-  }
-  a {
-    background-color: white;
-  }
+    }
   </style>
 </head>
 
@@ -50,8 +70,8 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
 <footer>
   <div class="text-center" >
     <address>
-      <h3>Department of <?php echo $deptLngName;?></h3>
-      <a href="mailto:<?php echo strtolower($addressEmail);?>"><?php echo strtolower($addressEmail);?></a>
+      <h2>Department of <?php echo $deptLngName;?></h2>
+      <a href="mailto:<?php echo strtolower($addressEmail);?>"><?php echo strtolower($addressEmail);?></a><br>
       <br><?php echo $addressBldg;?>, <?php echo $address2;?>
       <br><?php echo $addressStreet;?>
       <br>Ann Arbor, MI
@@ -59,11 +79,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
       <br>P: <?php echo $addressPhone;?>
       <br>F: <?php echo $addressFax;?>
     </address>
-      <img class="img" src="img/lsa.png" alt="LSA at the University of Michigan">
-  </div>
 
-  <div class="text-center">
-    <a href="http://www.regents.umich.edu">© 2014 Regents of the University of Michigan</a>
   </div>
 </footer>
+  <div id="copyright" class="text-center">
+  <img class="img" src="img/lsa.png" alt="LSA at the University of Michigan"><br>
+    <a href="http://www.regents.umich.edu">© 2014 Regents of the University of Michigan</a>
+  </div>
+
 </body>
