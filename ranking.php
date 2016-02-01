@@ -252,6 +252,7 @@ if (!$resultsSel = $db->query($getRankings)) {
            a ranking for the top ten entries.</p>
            <p><em>NOTE: Each time you select a number it will no longer be available from the dropdown list. If you want to use a rank value that is already on another entry
            you will need to remove the value from the other entry first. </em></p>
+          <p class="text-danger"><em>NOTE: Once you press submit all your rankings will be recorded and the the ranking stage is final.</em></p>
 
         <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
 
