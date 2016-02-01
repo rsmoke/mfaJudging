@@ -109,7 +109,7 @@ if ($resJudge->num_rows > 0) {
       You will see a list of all the entries for a given contest sorted by your top rated down to the lowest
       rated entry. You will give a ranking with the best ranked as 1. You will need to leave a comment of
       several paragraphs for each manuscript in the ranking section. The contestants will see these comments
-      in thier entirety. You will not be able to tie contestants in a particular area.<br> The ranking stage
+      in their entirety. You will not be able to tie contestants in a particular area.<br> The ranking stage
       can be accessed by selecting the  <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc">
       Ranking</a> button at the top of the entry rating list for each contest. Once you press submit your
       rating is final.</li>
