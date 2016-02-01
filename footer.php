@@ -1,5 +1,5 @@
 <footer>
-	<div class="container">
+	<div class="container-fluid">
 	<div class="row clearfix">
 
 		<div class="col-xs-4">
@@ -10,8 +10,6 @@
 					<br><?php echo $addressStreet;?>
 					<br>Ann Arbor, MI
 					<br><?php echo $addressZip;?>
-					<br>P: <?php echo $addressPhone;?>
-					<br>F: <?php echo $addressFax;?>
 
 			</address>
 			<a href="https://www.lsa.umich.edu"><img class="img" src="img/lsa.png" alt="LSA at the University of Michigan"></a>
@@ -20,11 +18,13 @@
 
 		<div class="col-xs-4 hidden-xs">
 			<a href="mailto:<?php echo strtolower($addressEmail);?>"><?php echo strtolower($addressEmail);?></a><br />
-		    <a href="http://www.facebook.com/<?php echo $addressFacebook;?>"><img class="logo" width="29px" height="29px" src="img/fB29.png" alt="Visit us on Facebook" /></a><br />
+		    <a href="http://www.facebook.com/<?php echo $addressFacebook;?>"><img class="logo" width="29px" height="29px" src="img/fB29.png" alt="Visit us on Facebook" /></a>
+		    	P: <?php echo $addressPhone;?>
 		</div>
 		<div class="col-xs-4 visible-xs-block">
 			<a href="mailto:<?php echo strtolower($addressEmail);?>">eMail</a><br />
 		    <a href="http://www.facebook.com/<?php echo $addressFacebook;?>"><img class="logo" width="29px" height="29px" src="img/fB29.png" alt="Visit us on Facebook" /></a>
+					P: <?php echo $addressPhone;?>
 		</div>
 		<div class="col-xs-1"></div>
 		<div class="col-xs-1 hidden-xs"></div>

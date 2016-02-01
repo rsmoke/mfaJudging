@@ -49,6 +49,10 @@ body {
 	padding-top: 70px;
 }
 
+#mainContainer {
+  min-height: 800px;
+  min-width: 600px;
+}
 .notes {
 	padding: 0px 20px;
 	color: #888;
@@ -72,12 +76,18 @@ li {
 }
 
 footer {
+/*  position: fixed;*/
+  bottom: 0px;
+  width: 100%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: .6em; 
 	color: #5e8bac;
 	line-height:12px;
 	background-color: #ddd;	
 	padding-top: .3em;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 footer a img {

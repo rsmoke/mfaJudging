@@ -125,8 +125,8 @@ if ($resJudge->num_rows > 0) {
   </p>
 
 <div class="bg-info">
-  <p >This is the first round of judging using an online system so do not hesite to ask questions or offer comments.
-  <ul class="list-inline">
+  <p class="text-center">This is the first round of judging using an online system so do not hesite to ask questions or offer comments.
+  <ul class="list-inline text-center">
   <li>
     <address>
       <strong>Andrea Beauchamp</strong><br>
@@ -149,16 +149,17 @@ if ($resJudge->num_rows > 0) {
 
 <?php
 } else {
+  non_db_error("User " . $login_name . " not Authorized. isJudge= " . $isJudge);
 ?>
 
   <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
   <div id="notAdmin">
     <div class="row clearfix">
-      <div class="col-md-12">
+      <div class="col-xs-8 col-xs-offset-2">
 
           <div id="instructions" style="color:sienna;">
             <h1 class="text-center" >You are not authorized to this space!!!</h1>
-            <h4>University of Michigan - LSA Computer System Usage Policy</h4>
+            <h4 class="text-center" >University of Michigan - LSA Computer System Usage Policy</h4>
             <p>This is the University of Michigan information technology environment. You
             MUST be authorized to use these resources. As an authorized user, by your use
             of these resources, you have implicitly agreed to abide by the highest
@@ -168,7 +169,9 @@ if ($resJudge->num_rows > 0) {
             appropriate use of information technology. Non-compliance is considered a
             serious breach of community standards and may result in disciplinary and/or
             legal action.</p>
-            <div style="postion:fixed;margin:10px 0px 0px 250px;height:280px;width:280px;"><a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" /> </a></div>
+            <div>
+              <a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" height:280px;width:280px; /> </a>
+            </div>
           </div><!-- #instructions -->
       </div>
     </div>
