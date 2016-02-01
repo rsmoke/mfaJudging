@@ -52,6 +52,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
     }
 
     #copyright {
+      padding-top:10px;
       margin-left: -8px;
       background-color: #CCCCCC;
       position: fixed;
