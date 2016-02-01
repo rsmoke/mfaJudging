@@ -247,7 +247,7 @@ if (!$resultsSel = $db->query($getRankings)) {
       } else {
 ?>
       <div class="bg-warning infosection">
-           <p><strong>Ranking  Instructions:</strong> Please select the top 10 entries from the list of applications you have rated. Using the
+           <p><strong>Ranking  Instructions:</strong> Please select the top entries from the list of applications you have rated. Using the
            dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting
            a ranking for the top ten entries.</p>
            <p><em>NOTE: Each time you select a number it will no longer be available from the dropdown list. If you want to use a rank value that is already on another entry

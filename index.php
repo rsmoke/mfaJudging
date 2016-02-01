@@ -87,35 +87,41 @@ if ($resJudge->num_rows > 0) {
         </nav>
 
     <?php if ($isJudge) {
-      non_db_error("User " . $login_name . " not Authorized. isJudge=" . $isJudge);
+      //non_db_error("User " . $login_name . " not Authorized. isJudge=" . $isJudge);
         ?>
-<div class="container"><!-- container of all things -->
-<div class="jumbotron">
+<div id="mainContainer" class="container"><!-- container of all things -->
+<div class="page-header">
   <h1>Judging Instructions</h1>
   <p class="bg-warning">Please read and understand the instructions below before submitting any evaluations.</p>
   <p>
     There are two stages to the evaluation process.
     <ol>
-      <li>The first stage is reading the entries and giving them a rating from 1 to 5 stars. You are also 
-      able to write a comment about the entry and save it with the rating. You need to provide a rating for all entries 
-      in the contest area you have been assigned. <u>Only rated entries will move forward to the ranking stage</u> so you will 
-      want to give ratings to all the entries in a particular contest before moving to the ranking stage. <br>The rating 
-      stage can be accessed by selecting <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Rating</a> below.</li>
-      <li>The second stage of the judging process is ranking the entries that you rated in the previous step. You will
-      see a list of all the entries for a given contest sorted by the top rated down to the lowest rated entry. You will
-      give, what you consider to be the top 10 entries, a ranking with the best ranked as 1. You are able to leave a comment 
-      in the ranking section.<br> The ranking stage can be accessed by selecting the 
-      <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc"> Ranking</a> button at the top of the entry
-      rating list for each contest.</li>
+      <li>The first stage is reading the entries and giving them a rating from 1 to 5 stars. You are also
+      able to write a comment about the entry and save it with the rating. <span style="color:red">This is
+      a comment for your use only, to help you distinguish between manuscripts -- the contestant will not
+      see it.</span> You need to provide a rating for all entries in the contest area you have been
+      assigned. <u>Only rated entries will move forward to the ranking stage</u> so you will want to give
+      ratings to all the entries in a particular contest before moving to the ranking stage. <br>The rating
+      stage can be accessed by selecting
+      <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Rating</a> below.
+      Once you press submit your rating is final.</li>
+      <li>The second stage of the judging process is ranking the entries that you rated in the previous step.
+      You will see a list of all the entries for a given contest sorted by your top rated down to the lowest
+      rated entry. You will give a ranking with the best ranked as 1. You will need to leave a comment of
+      several paragraphs for each manuscript in the ranking section. The contestants will see these comments
+      in thier entirety. You will not be able to tie contestants in a particular area.<br> The ranking stage
+      can be accessed by selecting the  <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc">
+      Ranking</a> button at the top of the entry rating list for each contest. Once you press submit your
+      rating is final.</li>
     </ol>
-    
+
       <div class="btn-group" role="group" aria-label="button group">
         <a class="btn btn-primary fa fa-star" href="rating.php" role="button"> Rating</a>
       </div>
       <div class="btn-group" role="group" aria-label="button group">
         <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
       </div>
-    
+
   </p>
   <p>
     The following is a list of the icons that you will see throughout the application
