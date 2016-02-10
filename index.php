@@ -112,7 +112,7 @@ if ($resJudge->num_rows > 0) {
       in their entirety. You will not be able to tie contestants in a particular area.<br> The ranking stage
       can be accessed by selecting the  <a id="rankingsample" class="btn btn-success btn-xs disabled fa fa-sort-numeric-asc">
       Ranking</a> button at the top of the entry rating list for each contest. Once you press submit your
-      rating is final.</li>
+      ranking is final.</li>
     </ol>
 
       <div class="btn-group" role="group" aria-label="button group">
