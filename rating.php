@@ -171,6 +171,7 @@ $sqlIndEntry = <<<SQL
       FROM `lk_category`
       JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
       WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
+      ORDER BY manuscriptType
 SQL;
 }else{
 $sqlIndEntry = <<<SQL
