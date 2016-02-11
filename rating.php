@@ -156,36 +156,41 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rate</th><th>Title</th><th>Manuscript<br><em>(opens in a new browser tab)</em></th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th>Date Entered</th><th><small>AppID</small></th>
+                  <th>Rate</th><th>Title</th><th>Manuscript<br><em>(opens in a new browser tab)</em></th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>
 <?php
+if ($instance['ContestId'] < 18){
 $sqlIndEntry = <<<SQL
-   -- SELECT *
-   -- FROM vw_entrydetail
-   -- LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
-   --  WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
-   --    SELECT DISTINCT name
-   --    FROM `lk_category`
-   --    JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
-   --    WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
+   SELECT *
+   FROM vw_entrydetail
+   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
+    WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
+      SELECT DISTINCT name
+      FROM `lk_category`
+      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
+      WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
+SQL;
+}else{
+$sqlIndEntry = <<<SQL
      SELECT *
    FROM vw_entrydetail_with_classlevel AS vw
-   LEFT OUTER JOIN tbl_evaluations ON (vw.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = 'rsmoke')
-    WHERE vw.ContestInstance = 18 AND vw.manuscriptType IN (
+   LEFT OUTER JOIN tbl_evaluations ON (vw.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
+    WHERE vw.ContestInstance = {$instance['ContestId']} AND vw.manuscriptType IN (
       SELECT DISTINCT name
       FROM `lk_category`
       JOIN `tbl_contestjudge` AS CJ ON (CJ.`categoryID` = `lk_category`.`id`)
-      WHERE uniqname = 'rsmoke') AND vw.status = 0 AND ((CASE WHEN vw.`classLevel` < 20 THEN 1 WHEN  vw.`classLevel` = 20 THEN 2 END) = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = 'rsmoke' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = 18)) OR 0 = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = 'rsmoke' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = 18)))
+      WHERE uniqname = '$login_name') AND vw.status = 0 AND ((CASE WHEN vw.`classLevel` < 20 THEN 1 WHEN  vw.`classLevel` = 20 THEN 2 END) = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = {$instance['ContestId']})) OR 0 = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = {$instance['ContestId']})))
 SQL;
+}
 $resultsInd = $db->query($sqlIndEntry);
 if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
       $disable = ($entry["rating"] && $entry['evaluator'] == $login_name)? "disabled" : "";
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-star ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td><a href="contestfiles/' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-star ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td><a href="contestfiles/' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
