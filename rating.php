@@ -185,7 +185,7 @@ if (!$resultsInd) {
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
       $disable = ($entry["rating"] && $entry['evaluator'] == $login_name)? "disabled" : "";
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-star ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-star ' . $disable . '" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td><a href="contestfiles/' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . date_format(date_create($entry['datesubmitted']),"F jS Y \a\\t g:ia") . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
