@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudging.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -95,7 +95,7 @@ echo $sqlInsert;
           <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
             <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><?php echo "$contestTitle";?></a>
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><?php echo "$contestTitle";?><span style="color:#00FF80"> - Judging</span></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
@@ -121,7 +121,7 @@ echo $sqlInsert;
     <div class="row clearfix">
       <div class="col-md-12">
           <div>
-              <h4>Summary of Evaluations for
+              <h4>You are submitting evaluations for
 <?php
 $contestSelect = <<<SQL
   SELECT name
@@ -252,7 +252,6 @@ if (!$resultsSel = $db->query($getRankings)) {
            a ranking for the top ten entries.</p>
            <p><em>NOTE: Each time you select a number it will no longer be available from the dropdown list. If you want to use a rank value that is already on another entry
            you will need to remove the value from the other entry first. </em></p>
-          <p class="text-danger"><em>NOTE: Once you press submit all your rankings will be recorded and the the ranking stage is final.</em></p>
 
         <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
 
@@ -265,7 +264,7 @@ if (!$resultsSel = $db->query($getRankings)) {
 
           <table class="table table-hover">
             <thead>
-              <th>Rank</th><th>Rating</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Rating Comment</th><th>Comment</th>
+              <th>Rank</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Comment</th>
             </thead>
             <tbody>
             <?php
@@ -310,8 +309,6 @@ echo         '<input type="hidden" name="entryID_' . $entry['entry_id'] . '" val
                     <option>10</option>
                   </select>
                 </div>
-              </td><td>
-                <img src="img/' . $entry['rating'] . 'star.png">
               </td><td>
                 ' . $entry['title'] . '
               </td><td>
