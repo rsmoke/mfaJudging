@@ -142,105 +142,6 @@ SQL;
     ?>
 
 </h4>
-<?php
-$checkforranking = <<< SQL
-  SELECT DISTINCT contestID
-  FROM tbl_ranking
-  WHERE rankedby = '$login_name' AND contestID = $contestID
-SQL;
-    if (!$resultsSel = $db->query($checkforranking)) {
-        dbFatalError($db->error, "data select issue", $checkforranking);
-        exit($user_err_message);
-    }
-    if ($resultsSel->num_rows > 0) {
-        ?>
-    <div class="bg-info">
-      <h5>Below is a summary of all the ratings and rankings you submitted. The greenbox contains
-      the entries that you ranked as being the top ones.</h5>
-    </div>
-        <table class="table table-hover bg-success">
-          <thead>
-            <th>Rank</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Contestant<br>Comment</th><th>Committee<br>Comment</th><th><small>EntryID</small></th>
-          </thead>
-          <tbody>
-          <?php
-$getRankings = <<<SQL
-              SELECT teval.id AS evalid, teval.rankedby, teval.rank, teval.contestantcomment as contestantcomment, teval.committeecomment AS committeecomment, teval.entryid,
-               te.title, te.documentname, te.contestID, lcs.name AS contestname, lcat.name AS division, ta.penName
-              FROM tbl_ranking AS teval
-              JOIN tbl_entry AS te ON (teval.`entryid` = te.`id`)
-              JOIN `tbl_contest` AS tc ON (te.contestID = tc.id)
-              JOIN lk_contests AS lcs ON (tc.`contestsID` = lcs.id)
-              JOIN tbl_applicant AS ta ON (te.`applicantID` = ta.id)
-              JOIN lk_category as lcat ON (te.`categoryID` = lcat.id)
-              WHERE teval.rankedby = '$login_name' AND te.contestID = $contestID
-              ORDER BY teval.rank ASC
-
-SQL;
-        if (!$resultsSel = $db->query($getRankings)) {
-            dbFatalError($db->error, "data select issue", $getRankings);
-            exit($user_err_message);
-        }
-        if ($resultsSel->num_rows > 0) {
-            while ($entry = $resultsSel->fetch_assoc()) {
-                if ($entry['rank'] > 0) {
-                    echo '<tr><td>
-                ' . $entry['rank'] . '
-              </td><td>
-                ' . $entry['title'] . '
-              </td><td>
-                <a href="contestfiles/' . $entry['documentname'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a>
-              </td><td>
-                ' . $entry['penName'] . '
-              </td><td>
-                ' . $entry['division'] . '
-              </td><td>
-                ' . $entry['contestantcomment'] . '
-              </td><td>
-                ' . $entry['committeecomment'] . '
-              </td><td class="text-center">
-                <small>' . $entry['entryid'] . '</small>
-              </td></tr>';
-                }
-            }
-            echo '</tbody></table>';
-        }
-
-        if (!$resultsSel = $db->query($getRankings)) {
-            dbFatalError($db->error, "data select issue", $getRankings);
-            exit($user_err_message);
-        }
-        if ($resultsSel->num_rows > 0) {
-            echo '<table class="table table-hover">
-            <thead>
-            <th>Rank</th><th>Entry Title</th><th>Read</th><th>Authors<br>Pen-name</th><th>Division</th><th>Contestant Comment</th><th>Committee Comment</th><th><small>EntryID</small></th>
-          </thead>
-          <tbody>';
-            while ($entry = $resultsSel->fetch_assoc()) {
-                if ($entry['rank'] == 0) {
-                    echo '<tr><td>
-                ' . $entry['rank'] . '
-              </td><td>
-                ' . $entry['title'] . '
-              </td><td>
-                <a href="contestfiles/' . $entry['documentname'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a>
-              </td><td>
-                ' . $entry['penName'] . '
-              </td><td>
-                ' . $entry['division'] . '
-              </td><td>
-                ' . $entry['contestantcomment'] . '
-              </td><td>
-                ' . $entry['committeecomment'] . '
-              </td><td class="text-center">
-                <small>' . $entry['entryid'] . '</small>
-              </td></tr>';
-                }
-            }
-            echo '</tbody></table>';
-        }
-    } else {
-        ?>
       <div class="bg-warning infosection">
            <p><strong>Ranking  Instructions:</strong> Using the
            dropdown menu next to each entry, select a ranking value (1 <em>being the best</em> down to 10) for that entry. You will only be selecting
@@ -263,18 +164,31 @@ SQL;
             </thead>
             <tbody>
             <?php
-$getratings = <<<_SQL
-     SELECT *
-   FROM vw_entrydetail_with_classlevel AS vw
-   LEFT OUTER JOIN tbl_ranking ON (vw.`EntryId`= `tbl_ranking`.`entryid` AND `tbl_ranking`.rankedby = '$login_name')
+$getratings = <<<SQL
+    SELECT *
+    FROM vw_entrydetail_with_classlevel AS vw
+    LEFT OUTER JOIN tbl_ranking ON (vw.`EntryId`= `tbl_ranking`.`entryid` AND `tbl_ranking`.rankedby = '$login_name')
     WHERE vw.ContestInstance = $contestID AND vw.manuscriptType IN (
       SELECT DISTINCT name
       FROM `lk_category`
       JOIN `tbl_contestjudge` AS CJ ON (CJ.`categoryID` = `lk_category`.`id`)
-      WHERE uniqname = '$login_name') AND vw.status = 0 AND ((CASE WHEN vw.`classLevel` < 20 THEN 1 WHEN  vw.`classLevel` = 20 THEN 2 END) = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = $contestID)) OR 0 = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = $contestID)))
+      WHERE uniqname = '$login_name') AND vw.status = 0 AND
+            ((CASE WHEN vw.`classLevel` < 20 THEN 1 WHEN  vw.`classLevel` = 20 THEN 2 END) =
+              (SELECT CJ2.classLevel
+                FROM `tbl_contestjudge` AS CJ2
+                WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
+                (SELECT contestsID
+                  FROM tbl_contest
+                  WHERE tbl_contest.id = $contestID)) OR 0 =
+                  (SELECT CJ2.classLevel
+                    FROM `tbl_contestjudge` AS CJ2
+                    WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
+                    (SELECT contestsID
+                      FROM tbl_contest
+                      WHERE tbl_contest.id = $contestID)))
 
 
-_SQL;
+SQL;
 //$resultsInd = $db->query($getratings);
         //if (!$resultsInd) {
         if (!$resultsInd = $db->query($getratings)) {
@@ -331,9 +245,7 @@ _SQL;
           <input type="submit" class="btn btn-success" name="summarize" value="Submit"/>
           </form>
           <p>Status: <span id="status">Unsubmitted</span></p>
-<?php
-}
-    include "footer.php";?>
+<?php include "footer.php";?>
     <!-- //additional script specific to this page -->
       <script src="js/jdgMyScript.js"></script>
       <script src="js/validator.js"></script>
