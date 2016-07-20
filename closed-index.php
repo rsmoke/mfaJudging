@@ -38,16 +38,16 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudgin
       width: 130%;
     }
 
-    address {
+    h2 {
       text-shadow: 0px 1px 0px rgb(204, 204, 204), 0px 2px 0px rgb(201, 201, 201), 0px 3px 0px rgb(187, 187, 187), 0px 4px 0px rgb(185, 185, 185), 0px 5px 0px rgb(170, 170, 170), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 5px 10px rgba(0, 0, 0, 0.25), 0px 20px 20px rgba(0, 0, 0, 0.15);
-      color: rgb(51, 51, 51);
+      color: #0000FF;
       font-family: 'League Gothic', Impact, sans-serif;
       line-height: 1.2em;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       margin: 1em auto;
       text-align: center;
-      font-size: .8rem;
+      font-size: 1.2rem;
 
     }
 
