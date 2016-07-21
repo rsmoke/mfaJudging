@@ -75,46 +75,15 @@ if ($isJudge) {
               <li>There should only be one entry that earns an evaluation of 1 in a particular area.</li>
               <li>You are able to edit your evaluation on any particular entry up to the deadline for judging which is DATE.</li>
               <li>The start the evaluation process please select the
-                <a id="ratingsample" class="btn btn-primary btn-xs disabled fa fa-star"> Evaluate</a> button below</li>
+                <a id="evallist" class="btn btn-primary btn-xs disabled fa fa-star"> Evaluate</a> button below</li>
               </ul>
-
-              <div class="btn-group" role="group" aria-label="button group">
-                <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
+              <div class="clearfix text-center">
+                <div  role="group" aria-label="button group">
+                  <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
+                  <a class="btn btn-primary fa fa-star" href="evallist.php" role="button"> Evaluate</a>
+                </div>
               </div>
             </p>
-            <?php
-$sqlSelect = <<<SQL
-            SELECT
-              DISTINCT `tbl_contest`.`id` AS ContestId,
-              `tbl_contest`.`date_closed`,
-              `tbl_contest`.`judgingOpen`,
-              `lk_contests`.`name`,
-              `tbl_contestjudge`.`uniqname`
-            FROM tbl_contest
-            JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-            JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
-            WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`uniqname` = '$login_name'
-            ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
-SQL;
-    if (!$results = $db->query($sqlSelect)) {
-        dbFatalError($db->error, " -data insert issue- ", $sqlSelect, $login_name);
-        exit($user_err_message);
-    } else {
-        if ($results->num_rows === 0) {
-            $html = "<p class='text-info'>No contests are available for judging</p>";
-        } else {
-            $html  = '<table class="table table-striped"><tr>';
-            $count = $i = 0;
-            while ($instance = $results->fetch_assoc()) {
-                $count = $i++;
-                $html .= '<td><a class="btn btn-primary fa fa-star" href="ranking.php?ctst=' . $instance['ContestId'] . '" role="button"> Evaluate</a>&nbsp;' . $instance['name'] . ' </td>';
-                $html .= '</tr><tr>';
-            }
-            $html .= '</tr></table>';
-        }
-        echo $html;
-    }
-    ?>
             <div class="bg-info">
               <p class="text-center">This is the first round of judging using an online system so do not hesite to ask questions or offer comments.
                 <ul class="list-inline text-center">
