@@ -155,7 +155,6 @@ $sqlIndEntry = <<<SQL
   LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id)
   WHERE   entry.status = 0
       AND entry.ContestInstance = {$instance['ContestId']}
-      AND (evaluation.evaluator = '$login_name' OR evaluation.evaluator is null)
       AND entry.manuscriptType IN (
                     SELECT DISTINCT category.name
                     FROM `lk_category` AS category
@@ -164,19 +163,19 @@ $sqlIndEntry = <<<SQL
                                       )
       AND (
           (CASE WHEN entry.`classLevel` < 20 THEN 1 WHEN  entry.`classLevel` = 20 THEN 2 END) =
-                                                    (SELECT CJ2.classLevel
-                                                                                                      FROM `tbl_contestjudge` AS CJ2
-                                                                                                      WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
-                                                                              (SELECT contestsID
-                                                                                                                                                          FROM tbl_contest
-                                                                                                                                                          WHERE tbl_contest.id = {$instance['ContestId']}))
+                                                                                              (SELECT CJ2.classLevel
+                                                                                              FROM `tbl_contestjudge` AS CJ2
+                                                                                              WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
+                                                                                                                                                        (SELECT contestsID
+                                                                                                                                                        FROM tbl_contest
+                                                                                                                                                        WHERE tbl_contest.id = {$instance['ContestId']}))
         OR 0 =
           (SELECT CJ2.classLevel
                   FROM `tbl_contestjudge` AS CJ2
                   WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
-                                    (SELECT contestsID
-                                                                      FROM tbl_contest
-                                                                      WHERE tbl_contest.id = {$instance['ContestId']}))
+                                                                          (SELECT contestsID
+                                                                          FROM tbl_contest
+                                                                          WHERE tbl_contest.id = {$instance['ContestId']}))
       )
 
   ORDER BY -evaluation.rating DESC, document
@@ -187,7 +186,25 @@ if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . $entry['rating'] . '</td><td min-width="250px"><div class="commentBlock">' . $entry['contestantcomment'] . '</div></td><td min-width="250px"><div class="commentBlock">' . $entry['committeecomment'] . '</div></td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
+      if ($entry['evaluator'] == $login_name){
+        echo $entry['rating'];
+        } else {
+          echo '';
+        }
+        echo '</td><td min-width="250px"><div class="commentBlock">';
+      if ($entry['evaluator'] == $login_name){
+        echo $entry['contestantcomment'];
+        }else{
+          echo '';
+        }
+        echo '</div></td><td min-width="250px"><div class="commentBlock">';
+        if ($entry['evaluator'] == $login_name){
+          echo $entry['committeecomment'];
+        }else{
+          echo '';
+        }
+        echo '</div></td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
