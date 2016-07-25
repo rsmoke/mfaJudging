@@ -45,7 +45,7 @@
   top: 2px;
 }
 
-body { 
+body {
 	padding-top: 70px;
 }
 
@@ -80,10 +80,10 @@ footer {
   bottom: 0px;
   width: 100%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: .6em; 
+	font-size: .6em;
 	color: #5e8bac;
 	line-height:12px;
-	background-color: #ddd;	
+	background-color: #ddd;
 	padding-top: .3em;
   margin: auto;
   left: 0;
@@ -93,14 +93,14 @@ footer {
 footer a img {
 	border: 0px;
 	}
-	
+
 footer a {
-	color: #5e8bac; 
+	color: #5e8bac;
 	text-decoration: none;
 	}
 
 footer a:hover {
-	background-color: transparent; 
+	background-color: transparent;
 	text-decoration: underline;
 }
 
@@ -138,4 +138,9 @@ select {
 
 .radio-inline {
 	padding:2rem;
+}
+
+.commentBlock{
+  height: 50px;
+  overflow-y:auto;
 }
