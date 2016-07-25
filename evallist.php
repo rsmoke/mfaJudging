@@ -152,7 +152,7 @@ if (!$results) {
 $sqlIndEntry = <<<SQL
   SELECT evaluation.id AS evalID, EntryId, title, document, status, uniqname, classLevel, firstname, lastname, umid, penName, manuscriptType, contestName, datesubmitted, date_open, date_closed, evaluation.evaluator, evaluation.rating, evaluation.contestantcomment, evaluation.committeecomment
   FROM vw_entrydetail_with_classlevel AS entry
-  LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id)
+  LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id AND evaluation.evaluator = '$login_name')
   WHERE   entry.status = 0
       AND entry.ContestInstance = {$instance['ContestId']}
       AND entry.manuscriptType IN (

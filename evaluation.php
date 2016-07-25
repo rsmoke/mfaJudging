@@ -123,6 +123,30 @@ while ($row = $result->fetch_assoc()) {
             echo "</div>";
         }
         echo "<hr>";
+        $constcomment = '';
+        $commcomment = '';
+        $currRating = '';
+        $sqlEvalSelect = <<<SQL1
+          SELECT entry_id,
+          evaluator,
+          rating,
+          contestantcomment,
+          committeecomment
+          FROM vw_current_evaluations AS evaluation
+          WHERE entry_id = $entryid AND evaluator = '$login_name'
+
+SQL1;
+    if (!$result = $db->query($sqlEvalSelect)) {
+        dbFatalError($db->error, "data select issue", $sqlEvalSelect, $login_name);
+        exit($user_err_message);
+    }
+        if ($result->num_rows > 0) {
+          while ($currentEval = $result->fetch_assoc()){
+            $constcomment = $currentEval['contestantcomment'];
+            $commcomment = $currentEval['committeecomment'];
+            $currRating = $currentEval['rating'];
+          }
+        }
         ?>
         <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
           <input type="hidden" name="evaluator" value="<?php echo $login_name; ?>">
@@ -132,26 +156,26 @@ while ($row = $result->fetch_assoc()) {
           </div>
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" required>
-              <option></option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-              <option>10</option>
+              <option <?php echo ($currRating == '')? "selected" : '' ?> ></option>
+              <option <?php echo ($currRating == 1)? "selected" : '' ?> >1</option>
+              <option <?php echo ($currRating == 2)? "selected" : '' ?> >2</option>
+              <option <?php echo ($currRating == 3)? "selected" : '' ?> >3</option>
+              <option <?php echo ($currRating == 4)? "selected" : '' ?> >4</option>
+              <option <?php echo ($currRating == 5)? "selected" : '' ?> >5</option>
+              <option <?php echo ($currRating == 6)? "selected" : '' ?> >6</option>
+              <option <?php echo ($currRating == 7)? "selected" : '' ?> >7</option>
+              <option <?php echo ($currRating == 8)? "selected" : '' ?> >8</option>
+              <option <?php echo ($currRating == 9)? "selected" : '' ?> >9</option>
+              <option <?php echo ($currRating == 10)? "selected" : '' ?> >10</option>
             </select>
           </div>
           <div class="form-group">
             <label for="evalComments">Contestant viewable comments</label>
-            <textarea class="form-control" id="contestantComments" name="contestantComments" ></textarea>
+            <textarea class="form-control" id="contestantComments" name="contestantComments"><?php echo $constcomment; ?></textarea>
           </div>
           <div class="form-group">
             <label for="evalComments">Committee viewable comments <em>(contestant will not see these comments)</em></label>
-            <textarea class="form-control" id="committeeComments" name="committeeComments" ></textarea>
+            <textarea class="form-control" id="committeeComments" name="committeeComments"><?php echo $commcomment; ?></textarea>
           </div>
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
         </form>
