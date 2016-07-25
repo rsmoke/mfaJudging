@@ -144,41 +144,50 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rate</th><th>Title</th><th>Manuscript<br><em>(opens in a new browser tab)</em></th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th><small>AppID</small></th>
+                  <th>Rate</th><th>Title</th><th>Manuscript<br><em><small>(opens in a new browser tab)</small></em></th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th>Your current rating</th><th>Contestant Comment</th><th>Committee Comment</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>
 <?php
-if ($instance['ContestId'] < 18){
 $sqlIndEntry = <<<SQL
-   SELECT *
-   FROM vw_entrydetail
-   LEFT OUTER JOIN tbl_evaluations ON (vw_entrydetail.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
-    WHERE ContestInstance = {$instance['ContestId']} AND manuscriptType IN (
-      SELECT DISTINCT name
-      FROM `lk_category`
-      JOIN `tbl_contestjudge` ON (`tbl_contestjudge`.`categoryID` = `lk_category`.`id`)
-      WHERE uniqname = '$login_name') AND vw_entrydetail.status = 0
-      ORDER BY manuscriptType
+  SELECT evaluation.id AS evalID, EntryId, title, document, status, uniqname, classLevel, firstname, lastname, umid, penName, manuscriptType, contestName, datesubmitted, date_open, date_closed, evaluation.evaluator, evaluation.rating, evaluation.contestantcomment, evaluation.committeecomment
+  FROM vw_entrydetail_with_classlevel AS entry
+  LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id)
+  WHERE   entry.status = 0
+      AND entry.ContestInstance = {$instance['ContestId']}
+      AND (evaluation.evaluator = '$login_name' OR evaluation.evaluator is null)
+      AND entry.manuscriptType IN (
+                    SELECT DISTINCT category.name
+                    FROM `lk_category` AS category
+                    JOIN `tbl_contestjudge` AS contest_judge ON (contest_judge.`categoryID` = category.`id`)
+                    WHERE contest_judge.uniqname = '$login_name'
+                                      )
+      AND (
+          (CASE WHEN entry.`classLevel` < 20 THEN 1 WHEN  entry.`classLevel` = 20 THEN 2 END) =
+                                                    (SELECT CJ2.classLevel
+                                                                                                      FROM `tbl_contestjudge` AS CJ2
+                                                                                                      WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
+                                                                              (SELECT contestsID
+                                                                                                                                                          FROM tbl_contest
+                                                                                                                                                          WHERE tbl_contest.id = {$instance['ContestId']}))
+        OR 0 =
+          (SELECT CJ2.classLevel
+                  FROM `tbl_contestjudge` AS CJ2
+                  WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
+                                    (SELECT contestsID
+                                                                      FROM tbl_contest
+                                                                      WHERE tbl_contest.id = {$instance['ContestId']}))
+      )
+
+  ORDER BY -evaluation.rating DESC, document
 SQL;
-}else{
-$sqlIndEntry = <<<SQL
-     SELECT *
-   FROM vw_entrydetail_with_classlevel AS vw
-   LEFT OUTER JOIN tbl_evaluations ON (vw.`EntryId`= `tbl_evaluations`.`entry_id` AND `tbl_evaluations`.evaluator = '$login_name')
-    WHERE vw.ContestInstance = {$instance['ContestId']} AND vw.manuscriptType IN (
-      SELECT DISTINCT name
-      FROM `lk_category`
-      JOIN `tbl_contestjudge` AS CJ ON (CJ.`categoryID` = `lk_category`.`id`)
-      WHERE uniqname = '$login_name') AND vw.status = 0 AND ((CASE WHEN vw.`classLevel` < 20 THEN 1 WHEN  vw.`classLevel` = 20 THEN 2 END) = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = {$instance['ContestId']})) OR 0 = (Select CJ2.classLevel FROM `tbl_contestjudge` AS CJ2 WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` = (SELECT contestsID FROM tbl_contest WHERE tbl_contest.id = {$instance['ContestId']})))
-SQL;
-}
+
 $resultsInd = $db->query($sqlIndEntry);
 if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>' . $entry['rating'] . '</td><td>' . $entry['contestantcomment'] . '</td><td>' . $entry['committeecomment'] . '</td><td><small>' . $entry['EntryId'] . '</small></td></tr>';
     }
 }
 
