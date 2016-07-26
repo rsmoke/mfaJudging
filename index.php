@@ -106,31 +106,16 @@ if ($isJudge) {
                   </div>
                 </p>
                 <div class="bg-info">
-                  <p class="text-center">This is the first round of judging
-                    using an online system so do not hesite to ask questions or
-                    offer comments.
                     <ul class="list-inline text-center">
                       <li>
                         <address>
                           <strong>Andrea Beauchamp</strong><br>
-                          Assistant Director, Hopwood Awards Program<br>
-                        <abbr title="eMail">e:</abbr>
-                        <a href="mailto:abeauch@umich.edu">abeauch@umich.edu</a>
-                      </address>
-                    </li>
-                    <li></li>
-                    <li>
-                      <address>
-                        <strong>Rick Smoke</strong><br>
-                        Application Architect, LSA-
-                      <abbr title="Management Information Systems">MIS</abbr>
-                      <br>
-                    <abbr title="eMail">e:</abbr>
-                    <a href="mailto:rsmoke@umich.edu">rsmoke@umich.edu</a>
-                  </address>
-                </li>
-              </ul>
-            </p>
+                            Assistant Director, Hopwood Awards Program<br>
+                          <abbr title="eMail">e:</abbr>
+                          <a href="mailto:abeauch@umich.edu">abeauch@umich.edu</a>
+                        </address>
+                      </li>
+                    </ul>
           </div>
         </div>
         <?php include "footer.php";?>
