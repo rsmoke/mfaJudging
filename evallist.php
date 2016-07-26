@@ -72,7 +72,15 @@ if ($isJudge){
 <div id="contest">
   <div class="row clearfix">
     <div class="bg-warning infosection">
-    <p><strong>Evaluating instructions: </strong> Select an entry that you want to evaluate and click the star button next to it to go to the ranking form for that entry. </p>
+    <p><strong>Evaluating instructions: </strong>
+    <ul>
+    <li>Select an entry that you want to evaluate and click the star button next
+    to it to go to the ranking form for that entry.</li>
+    <li>If you are charged with judging more than one contest. You can hide or
+    display the set of entries for a particular contest by clicking on the name
+    of the contest.
+
+     </p>
     <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
     </div>
   </div>
@@ -119,7 +127,7 @@ if (!$results) {
             </a>
           </h6>
         </div>
-        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
           <div class="panel-body">
              <div class="table-responsive">
               <table class="table table-hover table-condensed">
