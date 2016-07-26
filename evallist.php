@@ -151,23 +151,23 @@ $sqlIndEntry = <<<SQL
                     JOIN `tbl_contestjudge` AS contest_judge ON (contest_judge.`categoryID` = category.`id`)
                     WHERE contest_judge.uniqname = '$login_name'
                                       )
-      AND (
+/*      AND (
           (CASE WHEN entry.`classLevel` < 20 THEN 1 WHEN  entry.`classLevel` = 20 THEN 2 END) =
-                                                                                              (SELECT CJ2.classLevel
+                                                                                              (SELECT DISTINCT CJ2.classLevel
                                                                                               FROM `tbl_contestjudge` AS CJ2
                                                                                               WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
                                                                                                                                                         (SELECT contestsID
                                                                                                                                                         FROM tbl_contest
                                                                                                                                                         WHERE tbl_contest.id = {$instance['ContestId']}))
         OR 0 =
-          (SELECT CJ2.classLevel
+          (SELECT DISTINCT CJ2.classLevel
                   FROM `tbl_contestjudge` AS CJ2
                   WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
                                                                           (SELECT contestsID
                                                                           FROM tbl_contest
                                                                           WHERE tbl_contest.id = {$instance['ContestId']}))
       )
-
+*/
   ORDER BY -evaluation.rating DESC, document
 SQL;
 
