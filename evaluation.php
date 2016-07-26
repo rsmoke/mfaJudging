@@ -108,9 +108,19 @@ SQL;
     <div class="container"><!-- container of all things -->
     <div class="row clearfix">
       <div class="col-md-12">
-        <div>
-          <h1>Entry Evaluation</h1>
-          <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
+        <div class="bg-warning infosection">
+        <p><strong>Entry Evaluation instructions: </strong>
+        <ul>
+        <li>You may view the entry by clicking the <button class="btn btn-xs" disabled><span class="fa fa-book fa-lg"></span></button> icon below.</li>
+        <li>Select a ranking and enter any comments in the appropriate boxes.
+        <ul>
+        <li>If you wish to give a ranking that has been given to another entry in the contest. You will need to first remove the ranking from the other entry. <em>(ie. select another ranking value or set it to zero)</em></li>
+        </ul>
+        </li>
+        <li>When you have finished evaluating, select the <button class="btn btn-xs btn-success" disabled>Submit</button> button.</li>
+        </ul>
+         </p>
+        <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
         </div>
         <hr>
         <?php
@@ -181,8 +191,7 @@ SQL1;
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
         </form>
         <p>Status: <span id="status">Unsubmitted</span></p>
-        <div><?php print_r( $_SESSION[$panelid."usedRankings"] );
-                   $_SESSION[$panelid."usedRankings"] = []; ?></div>
+        <div><?php $_SESSION[$panelid."usedRankings"] = []; ?></div>
         <?php
 }
     include "footer.php";?>

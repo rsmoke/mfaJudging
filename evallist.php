@@ -78,7 +78,8 @@ if ($isJudge){
     to it to go to the ranking form for that entry.</li>
     <li>If you are charged with judging more than one contest. You can hide or
     display the set of entries for a particular contest by clicking on the name
-    of the contest.
+    of the contest.</li>
+    </ul>
 
      </p>
     <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
@@ -206,7 +207,6 @@ if (!$resultsInd) {
 ?>
                 </tbody>
               </table>
-              <div><?php print_r( $_SESSION[$count."usedRankings"]) ?></div>
             </div>
           </div>
         </div>
