@@ -43,6 +43,7 @@ SQL;
         }
     }
     $entryid   = $db->real_escape_string(htmlspecialchars($_GET["evid"]));
+    $panelid   = $db->real_escape_string(htmlspecialchars($_GET["panel"]));
     $sqlSelect = <<<SQL
       SELECT EntryId,
       title,
@@ -156,17 +157,17 @@ SQL1;
           </div>
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" required>
-              <option <?php echo ($currRating == '')? "selected" : '' ?> ></option>
-              <option <?php echo ($currRating == 1)? "selected" : '' ?> >1</option>
-              <option <?php echo ($currRating == 2)? "selected" : '' ?> >2</option>
-              <option <?php echo ($currRating == 3)? "selected" : '' ?> >3</option>
-              <option <?php echo ($currRating == 4)? "selected" : '' ?> >4</option>
-              <option <?php echo ($currRating == 5)? "selected" : '' ?> >5</option>
-              <option <?php echo ($currRating == 6)? "selected" : '' ?> >6</option>
-              <option <?php echo ($currRating == 7)? "selected" : '' ?> >7</option>
-              <option <?php echo ($currRating == 8)? "selected" : '' ?> >8</option>
-              <option <?php echo ($currRating == 9)? "selected" : '' ?> >9</option>
-              <option <?php echo ($currRating == 10)? "selected" : '' ?> >10</option>
+              <option <?php echo ($currRating < 1)? " selected " : '' ?> value=NULL ></option>
+              <option <?php echo ($currRating == 1)? " selected " : ''; echo (in_array(1,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >1</option>
+              <option <?php echo ($currRating == 2)? " selected " : ''; echo (in_array(2,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >2</option>
+              <option <?php echo ($currRating == 3)? " selected " : ''; echo (in_array(3,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >3</option>
+              <option <?php echo ($currRating == 4)? " selected " : ''; echo (in_array(4,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >4</option>
+              <option <?php echo ($currRating == 5)? " selected " : ''; echo (in_array(5,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >5</option>
+              <option <?php echo ($currRating == 6)? " selected " : ''; echo (in_array(6,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >6</option>
+              <option <?php echo ($currRating == 7)? " selected " : ''; echo (in_array(7,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >7</option>
+              <option <?php echo ($currRating == 8)? " selected " : ''; echo (in_array(8,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >8</option>
+              <option <?php echo ($currRating == 9)? " selected " : ''; echo (in_array(9,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >9</option>
+              <option <?php echo ($currRating == 10)? " selected " : ''; echo (in_array(10,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >10</option>
             </select>
           </div>
           <div class="form-group">
@@ -180,6 +181,8 @@ SQL1;
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
         </form>
         <p>Status: <span id="status">Unsubmitted</span></p>
+        <div><?php print_r( $_SESSION[$panelid."usedRankings"] );
+                   $_SESSION[$panelid."usedRankings"] = []; ?></div>
         <?php
 }
     include "footer.php";?>

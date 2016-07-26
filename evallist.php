@@ -4,26 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-// $isJudge = false;
-// $_SESSION["isJudge"] = 0;
-
-// $sql = <<< _SQL
-//   SELECT *
-//   FROM tbl_contestjudge
-//   WHERE uniqname = '$login_name'
-//   ORDER BY uniqname
-// _SQL;
-
-// if (!$resJudge = $db->query($sql)) {
-//         db_fatal_error("data read issue", $db->error);
-//         exit;
-// }
-
-// if ($resJudge->num_rows > 0) {
-//     $isJudge = true;
-//     $_SESSION["isJudge"] = 1;
-// }
+if ($isJudge){
 
 ?>
 <!DOCTYPE html>
@@ -86,14 +67,12 @@ if (session_status() == PHP_SESSION_NONE) {
           </div>
         </nav>
 
-    <?php if ($_SESSION["isJudge"]) {
-        ?>
   <div class="container"><!-- container of all things -->
 
 <div id="contest">
   <div class="row clearfix">
     <div class="bg-warning infosection">
-    <p><strong>Evaluting instructions: </strong> Select an entry that you want to evaluate and click the star button next to it to go to the ranking form for that entry. </p>
+    <p><strong>Evaluating instructions: </strong> Select an entry that you want to evaluate and click the star button next to it to go to the ranking form for that entry. </p>
     <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
     </div>
   </div>
@@ -129,6 +108,8 @@ if (!$results) {
     $count = $i = 0;
     while ($instance = $results->fetch_assoc()) {
         $count = $i++;
+        $_SESSION[$count."usedRankings"] = [];
+
 ?>
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
@@ -186,9 +167,15 @@ if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '" data-panelid="' . $count . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
       if ($entry['evaluator'] == $login_name){
+        if ($entry['rating'] > 0){
         echo $entry['rating'];
+        array_push($_SESSION[$count."usedRankings"], $entry['rating']);
+        }else{
+          echo '';
+        }
+
         } else {
           echo '';
         }
@@ -211,6 +198,7 @@ if (!$resultsInd) {
 ?>
                 </tbody>
               </table>
+              <div><?php print_r( $_SESSION[$count."usedRankings"]) ?></div>
             </div>
           </div>
         </div>
@@ -224,44 +212,59 @@ if (!$resultsInd) {
   </div>
 </div>
 
+        <?php
+    include "footer.php";?>
+        <!-- //additional script specific to this page -->
+        <script src="js/jdgMyScript.js"></script>
+        <script src="js/validator.js"></script>
+        </div><!-- End Container of all things -->
+      </body>
+    </html>
     <?php
+$db->close();
 } else {
-?>
-
-  <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
-  <div id="notAdmin">
-    <div class="row clearfix">
-      <div class="col-md-12">
-
-          <div id="instructions" style="color:sienna;">
-            <h1 class="text-center" >You are not authorized to this space!!!</h1>
-            <h4>University of Michigan - LSA Computer System Usage Policy</h4>
-            <p>This is the University of Michigan information technology environment. You
-            MUST be authorized to use these resources. As an authorized user, by your use
-            of these resources, you have implicitly agreed to abide by the highest
-            standards of responsibility to your colleagues, -- the students, faculty,
-            staff, and external users who share this environment. You are required to
-            comply with ALL University policies, state, and federal laws concerning
-            appropriate use of information technology. Non-compliance is considered a
-            serious breach of community standards and may result in disciplinary and/or
-            legal action.</p>
-            <div style="postion:fixed;margin:10px 0px 0px 250px;height:280px;width:280px;"><a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" /> </a></div>
-          </div><!-- #instructions -->
-      </div>
-    </div>
-  </div>
-
-    <?php
+    non_db_error("User: " . $login_name . " -evaluation submission error- isJudge set to: " . $_SESSION["isJudge"]);
+    ?>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title><?php echo $siteTitle; ?></title>
+        <meta name="description" content="<?php echo $siteTitle; ?>">
+        <meta name="rsmoke" content="LSA_MIS">
+        <link rel="shortcut icon" href="ico/favicon.ico">
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/myStyles.css">
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+      </head>
+      <body>
+        <div id="notAdmin">
+          <div class="row clearfix">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div id="instructions" style="color:sienna;">
+                <h1 class="text-center" >You are not authorized to this space!!!</h1>
+                <h4 class="text-center" >University of Michigan - LSA Computer System Usage Policy</h4>
+                <p>This is the University of Michigan information technology environment. You
+                  MUST be authorized to use these resources. As an authorized user, by your use
+                  of these resources, you have implicitly agreed to abide by the highest
+                  standards of responsibility to your colleagues, -- the students, faculty,
+                  staff, and external users who share this environment. You are required to
+                  comply with ALL University policies, state, and federal laws concerning
+                  appropriate use of information technology. Non-compliance is considered a
+                  serious breach of community standards and may result in disciplinary and/or
+                legal action.</p>
+                <div class="text-center">
+                  <a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" height:280px;width:280px; /> </a>
+                </div>
+                </div><!-- #instructions -->
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+      <?php
 }
-    include("footer.php");?>
-    <!-- //additional script specific to this page -->
-      <script src="js/jdgMyScript.js"></script>
-      <script type="text/javascript">
-        $('.disabled').toggleClass("btn-info");
-      </script>
-</div><!-- End Container of all things -->
-</body>
-</html>
-
-<?php
-  $db->close();

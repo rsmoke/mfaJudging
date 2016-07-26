@@ -1,7 +1,8 @@
 $( document ).ready(function(){
   $('#contest').on('click', '.btn-eval', function (e){
     var entryid = $(this).data('entryid');
-    document.location = 'evaluation.php?evid=' + entryid;
+    var panelid = $(this).data('panelid');
+    document.location = 'evaluation.php?evid=' + entryid + '&panel=' + panelid;
   });
 
   $('#contest').on('click', '.btn-contestid', function (e){
@@ -24,7 +25,7 @@ $(function(){
           selected.push($(this).val());
       });
 
-      // Walk through every select option and enable if not 
+      // Walk through every select option and enable if not
       // in the list and not already selected
       $('[id^=rank_] option').each(function()
       {
