@@ -156,6 +156,11 @@ SQL1;
             $constcomment = $currentEval['contestantcomment'];
             $commcomment = $currentEval['committeecomment'];
             $currRating = $currentEval['rating'];
+            if ($currRating > 0){
+              $ratingItem = array_search($currRating, $_SESSION[$panelid."usedRankings"]);
+              unset($_SESSION[$panelid."usedRankings"][$ratingItem]);
+              $ratingItem = null;
+            }
           }
         }
         ?>
@@ -168,16 +173,16 @@ SQL1;
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" required>
               <option <?php echo ($currRating < 1)? " selected " : '' ?> value=NULL ></option>
-              <option <?php echo ($currRating == 1)? " selected " : ''; echo (in_array(1,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >1</option>
-              <option <?php echo ($currRating == 2)? " selected " : ''; echo (in_array(2,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >2</option>
-              <option <?php echo ($currRating == 3)? " selected " : ''; echo (in_array(3,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >3</option>
-              <option <?php echo ($currRating == 4)? " selected " : ''; echo (in_array(4,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >4</option>
-              <option <?php echo ($currRating == 5)? " selected " : ''; echo (in_array(5,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >5</option>
-              <option <?php echo ($currRating == 6)? " selected " : ''; echo (in_array(6,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >6</option>
-              <option <?php echo ($currRating == 7)? " selected " : ''; echo (in_array(7,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >7</option>
-              <option <?php echo ($currRating == 8)? " selected " : ''; echo (in_array(8,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >8</option>
-              <option <?php echo ($currRating == 9)? " selected " : ''; echo (in_array(9,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >9</option>
-              <option <?php echo ($currRating == 10)? " selected " : ''; echo (in_array(10,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> >10</option>
+              <option <?php echo ($currRating == 1)? " selected " : ''; echo (in_array(1,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=1 >1</option>
+              <option <?php echo ($currRating == 2)? " selected " : ''; echo (in_array(2,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=2 >2</option>
+              <option <?php echo ($currRating == 3)? " selected " : ''; echo (in_array(3,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=3 >3</option>
+              <option <?php echo ($currRating == 4)? " selected " : ''; echo (in_array(4,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=4 >4</option>
+              <option <?php echo ($currRating == 5)? " selected " : ''; echo (in_array(5,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=5 >5</option>
+              <option <?php echo ($currRating == 6)? " selected " : ''; echo (in_array(6,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=6 >6</option>
+              <option <?php echo ($currRating == 7)? " selected " : ''; echo (in_array(7,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=7 >7</option>
+              <option <?php echo ($currRating == 8)? " selected " : ''; echo (in_array(8,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=8 >8</option>
+              <option <?php echo ($currRating == 9)? " selected " : ''; echo (in_array(9,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=9 >9</option>
+              <option <?php echo ($currRating == 10)? " selected " : ''; echo (in_array(10,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=10 >10</option>
             </select>
           </div>
           <div class="form-group">
