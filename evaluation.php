@@ -190,7 +190,7 @@ SQL1;
             <textarea class="form-control" id="contestantComments" name="contestantComments"><?php echo $constcomment; ?></textarea>
           </div>
           <div class="form-group">
-            <label for="evalComments">Comments to committee<em>(contestant will not see these comments)</em></label>
+            <label for="evalComments">Comments to committee <em>(contestant will not see these comments)</em></label>
             <textarea class="form-control" id="committeeComments" name="committeeComments"><?php echo $commcomment; ?></textarea>
           </div>
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
