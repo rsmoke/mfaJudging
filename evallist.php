@@ -74,11 +74,9 @@ if ($isJudge){
     <div class="bg-warning infosection">
     <p><strong>Evaluating instructions: </strong>
     <ul>
-    <li>Select an entry that you want to evaluate and click the star button next
-    to it to go to the ranking form for that entry.</li>
-    <li>If you are charged with judging more than one contest. You can hide or
-    display the set of entries for a particular contest by clicking on the name
-    of the contest.</li>
+    <li>Select an entry you want to evaluate and click the adjacent
+        <i class="fa fa-sort-numeric-asc btn btn-xs btn-info disabled"></i> button to access the ranking form for that entry.</li>
+    <li>If you are judging more than one contest, you may choose to hide or display the entries for a particular contest by clicking on its name.</li>
     </ul>
 
      </p>
@@ -134,7 +132,7 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rate</th><th>Title</th><th>Manuscript<br><em><small>(opens in a new browser tab)</small></em></th><th>Authors<br>Pen-name</small></th><th>Manuscript Type</th><th>Your current rating</th><th>Contestant Comment</th><th>Committee Comment</th><th><small>AppID</small></th>
+                  <th>Rank</th><th>Title</th><th>Manuscript</th><th>Author's<br>pen name</small></th><th>Mss. Type</th><th>Current<br>ranking</th><th>Contestant comments</th><th>Committee comments</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -176,7 +174,7 @@ if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '" data-panelid="' . $count . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '" data-panelid="' . $count . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><i class="fa fa-book fa-lg" data-toggle="tooltip" data-placement="top" title="opens in a new browser tab"></i></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
       if ($entry['evaluator'] == $login_name){
         if ($entry['rating'] > 0){
         echo $entry['rating'];

@@ -75,24 +75,20 @@ if ($isJudge) {
             <ul>
               <li>You will be reading the entries and giving them a value of 1
               to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.</li>
-              <li>You need to provide an evaluation for the top 10 entries in
+              <li>You need to provide an evaluation for up to 10 entries in
                 the contest area you have been
-              assigned.</li>
-              <li>You may want to leave a comment in the <em>contestants comments</em>
+              assigned and entries may not be tied in ranking.</li>
+              <li>You may want to leave a comment in the <em>Comments to author</em>
                 section of the evalution page for each evaluated manuscript.
-                <ul><li><strong>Note: The contestants will see these comments in their
+                <ul><li><strong>Note: The contestant will see these comments in their
                 entirety.</strong></li></ul>
-                <li>You may also want to leave a comment in the <em>committee
-                  comments</em> section of the evalution page for each evaluated
-                  manuscript. <ul><li><strong>Note: The committe will see these comments
-                  but the contestants will not.</strong></li></ul>
-                  <li>There should only be one entry that earns an evaluation
-                  of 1 in a particular area.</li>
+                <li>You may also want to leave a comment in the <em>Comments to committee</em> section of the evalution page for each evaluated
+                  manuscript. <ul><li><strong>Note: The committee will see these comments
+                  but the contestant will not.</strong></li></ul>
                   <li>You are able to edit your evaluation on any particular
                   entry up to the deadline for judging which is DATE.</li>
                   <li>To start the evaluation process please select the
-                    <a id="evallist" class="btn btn-primary btn-xs disabled fa
-                    fa-star"> Evaluate</a> button below</li>
+                    <i class="btn btn-primary btn-xs disabled fa fa-sort-numeric-asc"> Evaluate</i> button below</li>
                   </ul>
                   <p><a href='mailComment.php'><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Questions or Comments</a></p>
                   <div class="clearfix text-center">
@@ -100,7 +96,7 @@ if ($isJudge) {
                       <a class="btn btn-warning fa fa-info-circle"
                         href="http://lsa.umich.edu/hopwood/contests-prizes.html"
                       role="button" target="_blank"> Contest Rules</a>
-                      <a class="btn btn-primary fa fa-star" href="evallist.php"
+                      <a class="btn btn-primary fa fa-sort-numeric-asc" href="evallist.php"
                       role="button"> Evaluate</a>
                     </div>
                   </div>

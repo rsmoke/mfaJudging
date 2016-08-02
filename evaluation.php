@@ -111,13 +111,13 @@ SQL;
         <div class="bg-warning infosection">
         <p><strong>Entry Evaluation instructions: </strong>
         <ul>
-        <li>You may view the entry by clicking the <button class="btn btn-xs" disabled><span class="fa fa-book fa-lg"></span></button> icon below.</li>
-        <li>Select a ranking and enter any comments in the appropriate boxes.
+        <li>View the entry by clicking the <i class="fa fa-book fa-lg text-info disabled"></i> button.</li>
+        <li>Select a ranking and enter any comments in the appropriate fields.
         <ul>
-        <li>If you wish to give a ranking that has been given to another entry in the contest. You will need to first remove the ranking from the other entry. <em>(ie. select another ranking value or set it to zero)</em></li>
+        <li>If you wish to give a ranking that has already been applied to another entry, you must change the existing ranking first.</li>
         </ul>
         </li>
-        <li>When you have finished evaluating, select the <button class="btn btn-xs btn-success" disabled>Submit</button> button.</li>
+        <li>When you have completed the evaluation, click the <i class="btn btn-xs btn-success" disabled>Submit</i> button.</li>
         </ul>
          </p>
         <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
@@ -128,9 +128,9 @@ while ($row = $result->fetch_assoc()) {
             echo "<div style='padding: 0 0 0 40px;'>";
             echo "<strong>Entry Title: </strong><mark>" . $row["title"] . "</mark>  <br />";
             echo '<a href="fileholder.php?file=' . $row['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a><em> (opens in a new browser tab)</em><br /><br />';
-            echo "<strong>Authors Pen-name:</strong> " . $row["penName"] . "<br />";
-            echo "<strong>The contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
-            echo '<strong>Date Submitted Online:</strong> ' . date_format(date_create($row["datesubmitted"]), "F jS Y \a\\t g:ia") . '<br />';
+            echo "<strong>Authors Pen name:</strong> " . $row["penName"] . "<br />";
+            echo "<strong>The Contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
+            echo '<strong>Date submitted:</strong> ' . date_format(date_create($row["datesubmitted"]), "F jS Y \a\\t g:ia") . '<br />';
             echo "</div>";
         }
         echo "<hr>";
@@ -168,7 +168,7 @@ SQL1;
           <input type="hidden" name="evaluator" value="<?php echo $login_name; ?>">
           <input type="hidden" name="entryid" value="<?php echo $entryid; ?>">
           <div >
-            <span class="bg-danger">A <strong>Ranking</strong> is required.</span>
+            <span class="bg-danger"><strong>Ranking</strong>(required)</span>
           </div>
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" required>
@@ -186,11 +186,11 @@ SQL1;
             </select>
           </div>
           <div class="form-group">
-            <label for="evalComments">Contestant viewable comments</label>
+            <label for="evalComments">Comments to author</label>
             <textarea class="form-control" id="contestantComments" name="contestantComments"><?php echo $constcomment; ?></textarea>
           </div>
           <div class="form-group">
-            <label for="evalComments">Committee viewable comments <em>(contestant will not see these comments)</em></label>
+            <label for="evalComments">Comments to committee viewable comments <em>(contestant will not see these comments)</em></label>
             <textarea class="form-control" id="committeeComments" name="committeeComments"><?php echo $commcomment; ?></textarea>
           </div>
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
