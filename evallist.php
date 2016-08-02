@@ -132,7 +132,7 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rank</th><th>Title</th><th>Manuscript</th><th>Author's<br>pen name</small></th><th>Mss. Type</th><th>Current<br>ranking</th><th>Contestant comments</th><th>Committee comments</th><th><small>AppID</small></th>
+                  <th>Rank</th><th>Title</th><th>Manuscript</th><th>Author's<br>pen name</small></th><th>Mss. type</th><th>Current<br>ranking</th><th>Contestant comments</th><th>Committee comments</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>

@@ -126,10 +126,10 @@ SQL;
         <?php
 while ($row = $result->fetch_assoc()) {
             echo "<div style='padding: 0 0 0 40px;'>";
-            echo "<strong>Entry Title: </strong><mark>" . $row["title"] . "</mark>  <br />";
+            echo "<strong>Entry title: </strong><mark>" . $row["title"] . "</mark>  <br />";
             echo '<a href="fileholder.php?file=' . $row['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a><em> (opens in a new browser tab)</em><br /><br />';
-            echo "<strong>Authors Pen name:</strong> " . $row["penName"] . "<br />";
-            echo "<strong>The Contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
+            echo "<strong>Authors pen name:</strong> " . $row["penName"] . "<br />";
+            echo "<strong>The contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
             echo '<strong>Date submitted:</strong> ' . date_format(date_create($row["datesubmitted"]), "F jS Y \a\\t g:ia") . '<br />';
             echo "</div>";
         }
@@ -168,7 +168,7 @@ SQL1;
           <input type="hidden" name="evaluator" value="<?php echo $login_name; ?>">
           <input type="hidden" name="entryid" value="<?php echo $entryid; ?>">
           <div >
-            <span class="bg-danger"><strong>Ranking</strong>(required)</span>
+            <span class="bg-danger"><strong>Ranking</strong> (required)</span>
           </div>
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" required>
@@ -190,7 +190,7 @@ SQL1;
             <textarea class="form-control" id="contestantComments" name="contestantComments"><?php echo $constcomment; ?></textarea>
           </div>
           <div class="form-group">
-            <label for="evalComments">Comments to committee viewable comments <em>(contestant will not see these comments)</em></label>
+            <label for="evalComments">Comments to committee<em>(contestant will not see these comments)</em></label>
             <textarea class="form-control" id="committeeComments" name="committeeComments"><?php echo $commcomment; ?></textarea>
           </div>
           <input type="submit" class="btn btn-success" name="evaluate" value="Submit" />
