@@ -102,8 +102,8 @@ SELECT
         `lk_contests`.`graduateEligible`,
         `tbl_contestjudge`.`uniqname`
     FROM tbl_contest
-    JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-    JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
+    LEFT OUTER JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+    LEFT OUTER JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
     WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`uniqname` = '$login_name'
     ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
 SQL;
@@ -143,12 +143,12 @@ $sqlIndEntry = <<<SQL
   LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id AND evaluation.evaluator = '$login_name')
   WHERE   entry.status = 0
       AND entry.ContestInstance = {$instance['ContestId']}
-      AND entry.manuscriptType IN (
-                    SELECT DISTINCT category.name
-                    FROM `lk_category` AS category
-                    JOIN `tbl_contestjudge` AS contest_judge ON (contest_judge.`categoryID` = category.`id`)
-                    WHERE contest_judge.uniqname = '$login_name'
-                                      )
+      -- AND entry.manuscriptType IN (
+      --               SELECT DISTINCT category.name
+      --               FROM `lk_category` AS category
+      --               JOIN `tbl_contestjudge` AS contest_judge ON (contest_judge.`categoryID` = category.`id`)
+      --               WHERE contest_judge.uniqname = '$login_name'
+      --                                 )
 /*      AND (
           (CASE WHEN entry.`classLevel` < 20 THEN 1 WHEN  entry.`classLevel` = 20 THEN 2 END) =
                                                                                               (SELECT DISTINCT CJ2.classLevel
