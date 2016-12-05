@@ -119,6 +119,7 @@ if (!$results) {
 
 ?>
       <div class="panel panel-default">
+        <a name="<?php echo $count ?>"></a>
         <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
           <h6 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
@@ -126,7 +127,7 @@ if (!$results) {
             </a>
           </h6>
         </div>
-        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+        <div id="collapse<?php echo $count ?>" class="panel-collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
           <div class="panel-body">
              <div class="table-responsive">
               <table class="table table-hover table-condensed">
