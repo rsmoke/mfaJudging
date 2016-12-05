@@ -51,8 +51,9 @@ SQL;
       penName,
       manuscriptType,
       contestName,
+      contestsID,
       datesubmitted
-      FROM vw_entrydetail
+      FROM vw_entrydetail_with_classlevel_currated
       WHERE EntryId = $entryid
 SQL;
     if (!$result = $db->query($sqlSelect)) {
@@ -125,6 +126,7 @@ SQL;
         <hr>
         <?php
 while ($row = $result->fetch_assoc()) {
+          $entriesContestsID = $row["contestsID"];
             echo "<div style='padding: 0 0 0 40px;'>";
             echo "<strong>Entry title: </strong><mark>" . $row["title"] . "</mark>  <br />";
             echo '<a href="fileholder.php?file=' . $row['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a><em> (opens in a new browser tab)</em><br /><br />';
@@ -168,10 +170,16 @@ SQL1;
           <input type="hidden" name="evaluator" value="<?php echo $login_name; ?>">
           <input type="hidden" name="entryid" value="<?php echo $entryid; ?>">
           <div >
-            <span class="bg-danger"><strong>Ranking</strong> (required)</span>
+            <span class="bg-danger"><strong>Ranking</strong> <?php  echo ($entriesContestsID == 10)? '' : " (required)"; ?></span><br>
+            <?php
+            if ($entriesContestsID == 10){
+              echo '<p><em>Note: The entries in the The Roy W. Cowden Memorial Fellowship do not require a Ranking.<br>
+              <strong>Please include the dollar amount you wish to award in the Comments to committee box below</strong></em></p>';
+            }
+            ?>
           </div>
           <div style="width: 70px;" class="form-group">
-            <select class="form-control" id="rating" name="rating" required>
+            <select class="form-control" id="rating" name="rating" <?php  echo ($entriesContestsID == 10)? '' : "required"; ?>>
               <option <?php echo ($currRating < 1)? " selected " : '' ?> value=NULL ></option>
               <option <?php echo ($currRating == 1)? " selected " : ''; echo (in_array(1,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=1 >1</option>
               <option <?php echo ($currRating == 2)? " selected " : ''; echo (in_array(2,$_SESSION[$panelid."usedRankings"]))? " disabled ": ''; ?> value=2 >2</option>
