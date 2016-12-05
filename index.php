@@ -93,11 +93,8 @@ if ($isJudge) {
                   <p><a href='mailComment.php'><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Questions or Comments</a></p>
                   <div class="clearfix text-center">
                     <div  role="group" aria-label="button group">
-                      <a class="btn btn-warning fa fa-info-circle"
-                        href="http://lsa.umich.edu/hopwood/contests-prizes.html"
-                      role="button" target="_blank"> Contest Rules</a>
-                      <a class="btn btn-primary fa fa-sort-numeric-asc" href="evallist.php"
-                      role="button"> Evaluate</a>
+                      <a class="btn btn-lg btn-primary fa fa-sort-numeric-asc" href="evallist.php" role="button"> Evaluate</a>
+                      <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a>
                     </div>
                   </div>
                 </p>
