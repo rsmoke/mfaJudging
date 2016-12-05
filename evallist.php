@@ -143,29 +143,6 @@ $sqlIndEntry = <<<SQL
   LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id AND evaluation.evaluator = '$login_name')
   WHERE   entry.status = 0
       AND entry.ContestInstance = {$instance['ContestId']}
-      -- AND entry.manuscriptType IN (
-      --               SELECT DISTINCT category.name
-      --               FROM `lk_category` AS category
-      --               JOIN `tbl_contestjudge` AS contest_judge ON (contest_judge.`categoryID` = category.`id`)
-      --               WHERE contest_judge.uniqname = '$login_name'
-      --                                 )
-/*      AND (
-          (CASE WHEN entry.`classLevel` < 20 THEN 1 WHEN  entry.`classLevel` = 20 THEN 2 END) =
-                                                                                              (SELECT DISTINCT CJ2.classLevel
-                                                                                              FROM `tbl_contestjudge` AS CJ2
-                                                                                              WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
-                                                                                                                                                        (SELECT contestsID
-                                                                                                                                                        FROM tbl_contest
-                                                                                                                                                        WHERE tbl_contest.id = {$instance['ContestId']}))
-        OR 0 =
-          (SELECT DISTINCT CJ2.classLevel
-                  FROM `tbl_contestjudge` AS CJ2
-                  WHERE CJ2.uniqname = '$login_name' AND CJ2.`contestsID` =
-                                                                          (SELECT contestsID
-                                                                          FROM tbl_contest
-                                                                          WHERE tbl_contest.id = {$instance['ContestId']}))
-      )
-*/
   ORDER BY -evaluation.rating DESC, document
 SQL;
 
