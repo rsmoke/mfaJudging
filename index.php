@@ -74,7 +74,8 @@ if ($isJudge) {
             There is only one stage to the evaluation process.
             <ul>
               <li>You will be reading the entries and giving them a value of 1
-              to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.</li>
+              to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.
+              <br><em>Note: The Roy W. Cowden Memorial Fellowship entries do not require a Ranking.</em></li>
               <li>You need to provide an evaluation for up to 10 entries in
                 the contest area you have been
               assigned and entries may not be tied in ranking.</li>
@@ -84,7 +85,8 @@ if ($isJudge) {
                 entirety.</strong></li></ul>
                 <li>You may also want to leave a comment in the <em>Comments to committee</em> section of the evalution page for each evaluated
                   manuscript. <ul><li><strong>Note: The committee will see these comments
-                  but the contestant will not.</strong></li></ul>
+                  but the contestant will not.</strong></li>
+                  <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li></ul>
                   <li>You are able to edit your evaluation on any particular
                   entry up to the deadline for judging which is DATE.</li>
                   <li>To start the evaluation process please select the

@@ -73,7 +73,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     $from = htmlspecialchars($_POST['email']); // this is the sender's Email address
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
-    $subject = "Hopwood Contest Judging- " . htmlspecialchars($_POST['topic']);
+    $subject = "Hopwood Contest Judging- " . htmlspecialchars($_POST['topic']) . " Sent on=> " . date("Y-m-d");
     $subject2 = "Copy of your Hopwood Contest comment or question form submission";
     $messageFooter = "-- Please do not reply to this email. If you requested a reply or if we need more information, we will contact you at the email address you provided. --";
     $message = "logged in as=> " . $login_name . " " . $first_name . " " . $last_name . " email=> " . $from . " wrote the following:" . "\n\n" . htmlspecialchars($_POST['message']);
