@@ -164,13 +164,13 @@ if (!$resultsInd) {
         } else {
           echo '';
         }
-        echo '</td><td min-width="250px"><div class="commentBlock">';
+        echo '</td><td class="comment_cell"><div class="commentBlock">';
       if ($entry['evaluator'] == $login_name){
         echo $entry['contestantcomment'];
         }else{
           echo '';
         }
-        echo '</div></td><td min-width="250px"><div class="commentBlock">';
+        echo '</div></td><td class="comment_cell"><div class="commentBlock">';
         if ($entry['evaluator'] == $login_name){
           echo $entry['committeecomment'];
         }else{
