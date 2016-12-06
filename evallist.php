@@ -118,8 +118,8 @@ if (!$results) {
         $_SESSION[$count."usedRankings"] = [];
 
 ?>
+      <a class='anchor' name="<?php echo $count ?>"></a>
       <div class="panel panel-default">
-        <a name="<?php echo $count ?>"></a>
         <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
           <h6 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">

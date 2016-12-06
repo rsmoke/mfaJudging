@@ -5,6 +5,10 @@
 body {
 	padding-top: 70px;
 }
+.anchor {
+  padding-top: 70px;
+  margin-top: -70px;
+}
 
 #mainContainer {
   min-height: 800px;

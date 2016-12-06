@@ -12,6 +12,7 @@ if ($_SESSION["isJudge"]) {
         $contestantComments = $db->real_escape_string(htmlspecialchars(($_POST["contestantComments"])));
         $committeeComments  = $db->real_escape_string(htmlspecialchars(($_POST["committeeComments"])));
         $entryid            = htmlspecialchars(($_POST["entryid"]));
+        $panelid            = htmlspecialchars(($_POST["panelid"]));
         if ($rating == "") {
             nonDbError("User: " . $login_name . " -evaluation submission error- User did not select rating");
             exit($user_err_message);
@@ -38,7 +39,7 @@ SQL;
             $db->close();
             unset($_POST['evaluate']);
             $evaluator = $rating = $evalComment = $entryid = null;
-            safeRedirect('evallist.php');
+            safeRedirect('evallist.php#'. $panelid);
             exit();
         }
     }
@@ -169,6 +170,7 @@ SQL1;
         <form class="validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
           <input type="hidden" name="evaluator" value="<?php echo $login_name; ?>">
           <input type="hidden" name="entryid" value="<?php echo $entryid; ?>">
+          <input type="hidden" name="panelid" value="<?php echo $panelid; ?>">
           <div >
             <span class="bg-danger"><strong>Ranking</strong> <?php  echo ($entriesContestsID == 10)? '' : " (required)"; ?></span><br>
             <?php
