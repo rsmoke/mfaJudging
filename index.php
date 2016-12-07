@@ -80,7 +80,7 @@ if ($isJudge) {
                 the contest area you have been
               assigned and entries may not be tied in ranking.</li>
               <li>You may want to leave a comment in the <em>Comments to author</em>
-                section of the evalution page for each evaluated manuscript.
+                section of the evaluation page for each evaluated manuscript.
                 <ul><li><strong>Note: The contestant will see these comments in their
                 entirety.</strong></li></ul>
                 <li>You may also want to leave a comment in the <em>Comments to committee</em> section of the evalution page for each evaluated
