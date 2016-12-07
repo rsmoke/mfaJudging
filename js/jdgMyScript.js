@@ -16,7 +16,8 @@ $( document ).ready(function(){
     document.location = 'ranking.php?ctst=' + contestid;
   });
 
-  if (window.location.pathname == '/evallist.php'){
+  var current_page = window.location.pathname.split("/")
+  if (current_page[current_page.length-1] == 'evallist.php'){
     $('#collapse'+ window.location.hash.substring(1,2)).addClass('in');
   }
 });
