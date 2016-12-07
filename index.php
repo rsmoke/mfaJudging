@@ -74,7 +74,7 @@ if ($isJudge) {
             There is only one stage to the evaluation process.
             <ul>
               <li>You will be reading the entries and giving them a value of 1
-              to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.
+              up to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.
               <br><em>Note: The Roy W. Cowden Memorial Fellowship entries do not require a Ranking.</em></li>
               <li>You need to provide an evaluation for up to 10 entries in
                 the contest area you have been

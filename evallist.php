@@ -74,9 +74,13 @@ if ($isJudge){
     <div class="bg-warning infosection">
     <p><strong>Evaluating instructions: </strong>
     <ul>
+    <li>The contest(s) you agreed to evaluate are listed below one per panel. Each panel contains the entries that were submitted to the contest named at the top of the individual panel.</li>
+
+    <li>If you are judging more than one contest, you may choose to hide or display the entries for a particular contest by clicking on its name.</li>
+
     <li>Select an entry you want to evaluate and click the adjacent
         <i class="fa fa-sort-numeric-asc btn btn-xs btn-info disabled"></i> button to access the ranking form for that entry.</li>
-    <li>If you are judging more than one contest, you may choose to hide or display the entries for a particular contest by clicking on its name.</li>
+
     </ul>
 
      </p>
@@ -127,7 +131,7 @@ if (!$results) {
             </a>
           </h6>
         </div>
-        <div id="collapse<?php echo $count ?>" class="panel-collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+        <div id="collapse<?php echo $count ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
           <div class="panel-body">
              <div class="table-responsive">
               <table class="table table-hover table-condensed">
