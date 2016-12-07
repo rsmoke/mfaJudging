@@ -88,7 +88,7 @@ if ($isJudge) {
                   but the contestant will not.</strong></li>
                   <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li></ul>
                   <li>You are able to edit your evaluation on any particular
-                  entry up to the deadline for judging which is Tuesday, January 3rd at Noon.</li>
+                  entry up to the deadline for judging which is <span class='bg-danger'><strong>Tuesday, January 3rd at Noon</strong></span>.</li>
                   <li>To start the evaluation process please select the
                     <i class="btn btn-primary btn-xs disabled fa fa-sort-numeric-asc"> Evaluate</i> button below</li>
                   </ul>
