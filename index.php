@@ -83,7 +83,7 @@ if ($isJudge) {
                 section of the evaluation page for each evaluated manuscript.
                 <ul><li><strong>Note: The contestant will see these comments in their
                 entirety.</strong></li></ul>
-                <li>You may also want to leave a comment in the <em>Comments to committee</em> section of the evalution page for each evaluated
+                <li>You may also want to leave a comment in the <em>Comments to committee</em> section of the evaluation page for each evaluated
                   manuscript. <ul><li><strong>Note: The committee will see these comments
                   but the contestant will not.</strong></li>
                   <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li></ul>
