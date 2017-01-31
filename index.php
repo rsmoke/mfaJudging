@@ -87,10 +87,8 @@ if ($isJudge) {
                   manuscript. <ul><li><strong>Note: The committee will see these comments
                   but the contestant will not.</strong></li>
                   <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li></ul>
-                  <li>You are able to edit your evaluation on any particular
-                  entry up to the deadline for judging.
-                  <li>To start the evaluation process please select the
-                    <i class="btn btn-primary btn-xs disabled fa fa-sort-numeric-asc"> Evaluate</i> button below</li>
+                  <li>You are able to edit your evaluation on any particular entry up to the deadline for judging.</li>
+                  <li>To start the evaluation process please select the Evaluate button below</li>
                   </ul>
                   <p><a href='mailComment.php'><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Questions or Comments</a></p>
                   <div class="clearfix text-center">
