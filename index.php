@@ -79,17 +79,13 @@ if ($isJudge) {
               <li>You need to provide an evaluation for up to 10 entries in
                 the contest area you have been
               assigned and entries may not be tied in ranking.</li>
-              <li>You may optionally leave a comment in the <em>Comments to author</em>
-                section of the evaluation page for each evaluated manuscript.
-                <ul><li><strong>Note: The contestant will see these comments in their
-                entirety.</strong></li></ul>
-                <li>You may optionally leave a comment in the <em>Comments to committee</em> section of the evaluation page for each evaluated
-                  manuscript. <ul><li><strong>Note: The committee will see these comments
-                  but the contestant will not.</strong></li>
-                  <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li></ul>
-                  <li>You are able to edit your evaluation on any particular entry up to the deadline for judging.</li>
-                  <li>To start the evaluation process please select the Evaluate button below</li>
-                  </ul>
+              <li>The comment areas are optional and for your own use. No one will read the comments.</li>
+              <ul>
+                <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li>
+              </ul>  
+              <li>You are able to edit your evaluation on any particular entry up to the deadline for judging.</li>
+              <li>To start the evaluation process please select the Evaluate button below</li>
+            </ul>
                   <p><a href='mailComment.php'><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Questions or Comments</a></p>
                   <div class="clearfix text-center">
                     <div  role="group" aria-label="button group">
