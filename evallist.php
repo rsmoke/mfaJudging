@@ -40,7 +40,7 @@ if ($isJudge){
         -moz-appearance:textfield;
     }
   </style>
-  <base href=$URLS>
+  <base href=<?php echo URL; ?>>
 </head>
 
 <body>
