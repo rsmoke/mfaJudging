@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudging.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishMFAJudging.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
 	$queryContests = "SELECT L1.id, L1.name

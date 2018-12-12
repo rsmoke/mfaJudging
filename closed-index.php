@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestJudging.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishMFAJudging.php');
 ?>
 <!DOCTYPE html>
 <body class="Site">

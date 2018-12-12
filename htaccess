@@ -1,4 +1,4 @@
-#hopwoodjudging Site Security
+#MFAjudging Site Security
 #Web Space Restriction Description
 
 # MAINTENANCE-PAGE REDIRECT
@@ -17,5 +17,5 @@ CosignRequireFactor   UMICH.EDU
 SSLRequireSSL
 AuthLDAPURL ldap://ldap.umich.edu
 #Require ldap-group cn=hopwoodContestAdmins,ou=User Groups,ou=Groups,dc=umich,dc=edu
-Require ldap-group cn=hopwood-contest-judges,ou=User Groups,ou=Groups,dc=umich,dc=edu
+#Require ldap-group cn=hopwood-contest-judges,ou=User Groups,ou=Groups,dc=umich,dc=edu
 #Require user <username>
