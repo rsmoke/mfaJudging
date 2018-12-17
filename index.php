@@ -10,11 +10,11 @@ if ($isJudge) {
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>LSA-<?php echo "$contestTitle"; ?> Writing Contests</title>
+    <title>LSA-<?php echo "$contestTitle"; ?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="LSA-English Writing Contests">
-    <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
+    <meta name="keywords" content="LSA-English, MFA, Writing, UniversityofMichigan">
     <meta name="author" content="LSA-MIS_rsmoke">
     <link rel="icon" href="img/favicon.ico">
     <!--   <script type='text/javascript' src='../js/webforms2.js'></script> -->
@@ -82,7 +82,7 @@ if ($isJudge) {
               <li>The comment areas are optional and for your own use. No one will read the comments.</li>
               <ul>
                 <li><em>Note: If you are evaluating The Roy W. Cowden Memorial Fellowship entries, include the dollar amount you wish to award in the Comments to committee text box.</em></li>
-              </ul>  
+              </ul>
               <li>You are able to edit your evaluation on any particular entry up to the deadline for judging.</li>
               <li>To start the evaluation process please select the Evaluate button below</li>
             </ul>
@@ -98,10 +98,10 @@ if ($isJudge) {
                     <ul class="list-inline text-center">
                       <li>
                         <address>
-                          <strong>Andrea Beauchamp</strong><br>
+                          <strong>Hannah Ensor</strong><br>
                             Assistant Director, Hopwood Awards Program<br>
                           <abbr title="eMail">e:</abbr>
-                          <a href="mailto:abeauch@umich.edu">abeauch@umich.edu</a>
+                          <a href="mailto:ensorh@umich.edu">ensorh@umich.edu</a>
                         </address>
                       </li>
                     </ul>
@@ -122,8 +122,8 @@ if ($isJudge) {
     <html lang="en">
       <head>
         <meta charset="utf-8">
-        <title><?php echo $siteTitle; ?></title>
-        <meta name="description" content="<?php echo $siteTitle; ?>">
+        <title><?php echo $contestTitle; ?></title>
+        <meta name="description" content="<?php echo $contestTitle; ?>">
         <meta name="rsmoke" content="LSA_MIS">
         <link rel="shortcut icon" href="ico/favicon.ico">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">

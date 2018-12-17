@@ -37,7 +37,7 @@
 
 	<div class="row clearfix">
 		<div class="col-xs-12">
-		<a href="http://www.regents.umich.edu" class="btn btn-block btn-link btn-xs" type="button">© 2014 Regents of the University of Michigan</a>
+		<a href="http://www.regents.umich.edu" class="btn btn-block btn-link btn-xs" type="button">© 2018 Regents of the University of Michigan</a>
 		</div>
 	</div>
 </div>
@@ -48,4 +48,3 @@
   <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/bootstrap-formhelpers.min.js"></script>
-

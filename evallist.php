@@ -217,8 +217,8 @@ $db->close();
     <html lang="en">
       <head>
         <meta charset="utf-8">
-        <title><?php echo $siteTitle; ?></title>
-        <meta name="description" content="<?php echo $siteTitle; ?>">
+        <title><?php echo $contestTitle; ?></title>
+        <meta name="description" content="<?php echo $contestTitle; ?>">
         <meta name="rsmoke" content="LSA_MIS">
         <link rel="shortcut icon" href="ico/favicon.ico">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
