@@ -84,7 +84,7 @@ if ($isJudge){
     </ul>
 
      </p>
-    <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
+    <!-- <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a> -->
     </div>
   </div>
   <div class="row clearfix">
@@ -99,16 +99,14 @@ SELECT
         `tbl_contest`.`date_closed`,
         `tbl_contest`.`judgingOpen`,
         `lk_contests`.`name`,
-        `lk_contests`.`freshmanEligible`,
-        `lk_contests`.`sophmoreEligible`,
-        `lk_contests`.`juniorEligible`,
-        `lk_contests`.`seniorEligible`,
-        `lk_contests`.`graduateEligible`,
-        `tbl_contestjudge`.`uniqname`
+        `lk_contests`.`firstyearEligible`,
+        `lk_contests`.`secondyearEligible`,
+        `lk_contests`.`zellfellowEligible`,
+        `tbl_contestjudge`.`email`
     FROM tbl_contest
     LEFT OUTER JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
     LEFT OUTER JOIN `tbl_contestjudge` ON (`tbl_contest`.`contestsID` = `tbl_contestjudge`.`contestsID`)
-    WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`uniqname` = '$login_name'
+    WHERE `tbl_contest`.`judgingOpen` = 1 AND `tbl_contestjudge`.`email` = '$login_name'
     ORDER BY `tbl_contest`.`date_closed`,`lk_contests`.`name`
 SQL;
 
@@ -127,7 +125,7 @@ if (!$results) {
         <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
           <h6 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                <?php echo $instance['name'] . " <br /><small>closed: </small><span style='color:#0080FF'>" . date_format(date_create($instance['date_closed']),"F jS Y \a\\t g:ia") . "</span>" ?>
+                <?php echo $instance['name'] ?>
             </a>
           </h6>
         </div>
@@ -137,13 +135,13 @@ if (!$results) {
               <table class="table table-hover table-condensed">
                 <thead>
                 <tr>
-                  <th>Rank</th><th>Title</th><th>Manuscript</th><th>Author's<br>pen name</small></th><th>Mss. type</th><th>Current<br>ranking</th><th>Contestant comments</th><th>Committee comments</th><th><small>AppID</small></th>
+                  <th>Rank</th><th>Title</th><th>Manuscript</th><th>Current<br>ranking</th><th>Contestant comments</th><th>Committee comments</th><th><small>AppID</small></th>
                   </tr>
                 </thead>
                 <tbody>
 <?php
 $sqlIndEntry = <<<SQL
-  SELECT evaluation.id AS evalID, EntryId, title, document, status, uniqname, classLevel, firstname, lastname, umid, penName, manuscriptType, contestName, datesubmitted, date_open, date_closed, evaluation.evaluator, evaluation.rating, evaluation.contestantcomment, evaluation.committeecomment
+  SELECT evaluation.id AS evalID, EntryId, title, document, status, uniqname, classLevel, firstname, lastname, umid, contestName, datesubmitted, date_open, date_closed, evaluation.evaluator, evaluation.rating, evaluation.contestantcomment, evaluation.committeecomment
   FROM vw_entrydetail_with_classlevel_currated AS entry
   LEFT OUTER JOIN vw_current_evaluations AS evaluation ON (entry.`EntryId`= evaluation.entry_id AND evaluation.evaluator = '$login_name')
   WHERE   entry.status = 0
@@ -156,7 +154,7 @@ if (!$resultsInd) {
     echo "<tr><td>There are no applicants available</td></tr>";
 } else {
     while ($entry = $resultsInd->fetch_assoc()) {
-      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '" data-panelid="' . $count . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><i class="fa fa-book fa-lg" data-toggle="tooltip" data-placement="top" title="opens in a new browser tab"></i></a></td><td>' . $entry['penName'] . '</td><td>' . $entry['manuscriptType'] . '</td><td>';
+      echo '<tr><td><button class="btn btn-sm btn-info btn-eval fa fa-sort-numeric-asc btn btn-success" data-entryid="' . $entry['EntryId'] . '" data-panelid="' . $count . '"></button></td><td>' . $entry['title'] . '</td><td class="text-center"><a href="fileholder.php?file=' . $entry['document'] . '" target="_blank"><i class="fa fa-book fa-lg" data-toggle="tooltip" data-placement="top" title="opens in a new browser tab"></i></a></td><td>';
       if ($entry['evaluator'] == $login_name){
         if ($entry['rating'] > 0){
         echo $entry['rating'];

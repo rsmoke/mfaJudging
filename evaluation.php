@@ -49,8 +49,6 @@ SQL;
       SELECT EntryId,
       title,
       document,
-      penName,
-      manuscriptType,
       contestName,
       contestsID,
       datesubmitted
@@ -68,11 +66,11 @@ SQL;
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>LSA-<?php echo "$contestTitle"; ?> Writing Contests</title>
+    <title>LSA-<?php echo "$contestTitle"; ?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="LSA-English Writing Contests">
-    <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
+    <meta name="keywords" content="LSA-English, MFA, Writing, UniversityofMichigan">
     <meta name="author" content="LSA-MIS_rsmoke">
     <link rel="icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
@@ -131,8 +129,7 @@ while ($row = $result->fetch_assoc()) {
             echo "<div style='padding: 0 0 0 40px;'>";
             echo "<strong>Entry title: </strong><mark>" . $row["title"] . "</mark>  <br />";
             echo '<a href="fileholder.php?file=' . $row['document'] . '" target="_blank"><span class="fa fa-book fa-lg"></span></a><em> (opens in a new browser tab)</em><br /><br />';
-            echo "<strong>Authors pen name:</strong> " . $row["penName"] . "<br />";
-            echo "<strong>The contest and division entered:</strong> " . $row["contestName"] . " - " . $row["manuscriptType"] . "<br />";
+            echo "<strong>The contest entered:</strong> " . $row["contestName"] . "<br />";
             echo '<strong>Date submitted:</strong> ' . date_format(date_create($row["datesubmitted"]), "F jS Y \a\\t g:ia") . '<br />';
             echo "</div>";
         }
@@ -173,12 +170,6 @@ SQL1;
           <input type="hidden" name="panelid" value="<?php echo $panelid; ?>">
           <div >
             <span class="bg-danger"><strong>Ranking</strong> <?php  echo ($entriesContestsID == 10)? '' : " (required)"; ?></span><br>
-            <?php
-            if ($entriesContestsID == 10){
-              echo '<p><em>Note: The entries in the The Roy W. Cowden Memorial Fellowship do not require a Ranking.<br>
-              <strong>Please include the dollar amount you wish to award in the Comments to committee box below</strong></em></p>';
-            }
-            ?>
           </div>
           <div style="width: 70px;" class="form-group">
             <select class="form-control" id="rating" name="rating" <?php  echo ($entriesContestsID == 10)? '' : "required"; ?>>
