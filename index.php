@@ -68,23 +68,19 @@ if ($isJudge) {
         <div id="mainContainer" class="container"><!-- container of all things -->
         <div class="page-header">
           <h1>Judging Instructions</h1>
-          <p class="bg-warning">Please read and understand the instructions
-          below before submitting any evaluations.</p>
+          <p class="bg-warning">Please email Hannah Ensor <a href="mailto:ensorh@umich.edu">(ensorh@umich.edu)</a> the <strong>Contest name</strong> and <strong>Title</strong> of the of winning entry</p>
           <p>
-            There is only one stage to the evaluation process.
+          To assist you with choosing the winning entry we have provided an optional rating system.
             <ul>
-              <li>You will be reading the entries and giving them a value of 1
-              up to 10 with <strong class="text-success bg-success">1</strong> being the best or highest.</li>
-              <li>The comment areas are optional and for your own use. No one will read the comments.</li>
+              <li>You may give the entry a value of 1 up to 10 with <strong>1</strong> considered the best or highest. </li>
+              <li>The comment areas are also optional and for your own use. No one will read the comments.</li>
               <li>You are able to edit your evaluation on any particular entry up to the deadline for judging.</li>
-              <li>After the deadline for judging has occurred, the entry you assigned the value of 1 will be considered the winner</li>
               <li>To start the evaluation process please select the Evaluate button below</li>
             </ul>
                   <p><a href='mailComment.php'><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Questions or Comments</a></p>
                   <div class="clearfix text-center">
                     <div  role="group" aria-label="button group">
                       <a class="btn btn-lg btn-primary fa fa-sort-numeric-asc" href="evallist.php" role="button"> Evaluate</a>
-                      <!-- <a class="btn btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" role="button" target="_blank"> Contest Rules</a> -->
                     </div>
                   </div>
                 </p>

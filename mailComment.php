@@ -14,7 +14,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="LSA-English Writing Contests">
-  <meta name="keywords" content="LSA-English, Hopwood, Writing, UniversityofMichigan">
+  <meta name="keywords" content="LSA-English, MFA, Writing, UniversityofMichigan">
   <meta name="author" content="LSA-MIS_rsmoke">
   <link rel="icon" href="img/favicon.ico">
 
@@ -69,12 +69,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
         <div class="col-md-6 col-md-offset-3 jumbotron">
 
 <?php if(isset($_POST['submit'])){
-    $to = "um_ricks+p8lizbzwi3rwjww5f8vh@boards.trello.com"; // this is your Email address
+    $to = "mfacontestnotify@umich.edu"; // this is your Email address
     $from = htmlspecialchars($_POST['email']); // this is the sender's Email address
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
-    $subject = "Hopwood Contest Judging- " . htmlspecialchars($_POST['topic']) . " Sent on=> " . date("Y-m-d");
-    $subject2 = "Copy of your Hopwood Contest comment or question form submission";
+    $subject = "MFA Contest Judging- " . htmlspecialchars($_POST['topic']) . " Sent on=> " . date("Y-m-d");
+    $subject2 = "Copy of your MFA Contest comment or question form submission";
     $messageFooter = "-- Please do not reply to this email. If you requested a reply or if we need more information, we will contact you at the email address you provided. --";
     $message = "logged in as=> " . $login_name . " " . $first_name . " " . $last_name . " email=> " . $from . " wrote the following:" . "\n\n" . htmlspecialchars($_POST['message']);
     $message2 = "Here is a copy of your message " . $first_name . ":\n\n" . htmlspecialchars($_POST['message']) . "\n\n" . $messageFooter;
@@ -86,7 +86,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     mail($from,$subject2,$message2, "From:english.department@umich.edu"); // sends a copy of the message to the sender
     echo "<h4>Mail Sent.</h4> <p>Thank you " . $first_name . " for getting in touch! We’ve sent you a copy of this message at the email address you provided.<br>
 Have a great day!</p>";
-    echo "<a class='btn btn-info' href='index.php'>Return to Hopwood Contest Judging</a>";
+    echo "<a class='btn btn-info' href='index.php'>Return to MFA Contest Judging</a>";
     // You can also use header('Location: thank_you.php'); to redirect to another page.
     unset($_POST['submit']);
     } else {

@@ -120,7 +120,6 @@ SQL;
         <li>When you have completed the evaluation, click the <i class="btn btn-xs btn-success" disabled>Submit</i> button.</li>
         </ul>
          </p>
-        <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a>
         </div>
         <hr>
         <?php
