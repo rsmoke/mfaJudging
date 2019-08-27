@@ -72,19 +72,21 @@ if ($isJudge){
 <div id="contest">
   <div class="row clearfix">
     <div class="bg-warning infosection">
-    <p><strong>Evaluating instructions: </strong>
-    <ul>
-    <li>The contest(s) you agreed to evaluate are listed below one per panel. Each panel contains the entries that were submitted to the contest named at the top of the individual panel.</li>
+      <p><strong>Evaluating instructions: </strong>
+      <ul>
+      <li>The contest(s) you agreed to evaluate are listed below one per panel. Each panel contains the entries that were submitted to the contest named at the top of the individual panel.</li>
 
-    <li>If you are judging more than one contest, you may choose to hide or display the entries for a particular contest by clicking on its name.</li>
+      <li>If you are judging more than one contest, you may choose to hide or display the entries for a particular contest by clicking on its name.</li>
 
-    <li>Select an entry you want to evaluate and click the adjacent
-        <i class="fa fa-sort-numeric-asc btn btn-xs btn-info disabled"></i> button to access the ranking form for that entry.</li>
+      <li>Select an entry you want to evaluate and click the adjacent
+          <i class="fa fa-sort-numeric-asc btn btn-xs btn-info disabled"></i> button to access the ranking form for that entry.</li>
 
-    </ul>
-
-     </p>
-    <!-- <a class="btn btn-xs btn-warning fa fa-info-circle" href="http://lsa.umich.edu/hopwood/contests-prizes.html" target="_blank"> Contest Rules</a> -->
+      </ul>
+      </p>
+      <hr>
+      <div class="bg-warning text-center" style="height: 3rem;">
+        <h5>Upon completion of your evaluations, please email the MFA Contest Office <a href="mailto:mfacontestnotify@umich.edu">(mfacontestnotify@umich.edu)</a> the <u>Contest name</u> and <u>Title</u> of the winning entry</h5>
+      </div>
     </div>
   </div>
   <div class="row clearfix">

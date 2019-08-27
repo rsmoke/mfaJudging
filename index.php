@@ -68,7 +68,10 @@ if ($isJudge) {
         <div id="mainContainer" class="container"><!-- container of all things -->
         <div class="page-header">
           <h1>Judging Instructions</h1>
-          <p class="bg-warning">Please email Hannah Ensor <a href="mailto:ensorh@umich.edu">(ensorh@umich.edu)</a> the <strong>Contest name</strong> and <strong>Title</strong> of the of winning entry</p>
+          <div class="bg-warning text-center" style="height: 3rem;">
+            <h5>Upon completion of your evaluations, please email the MFA Contest Office <a href="mailto:mfacontestnotify@umich.edu">(mfacontestnotify@umich.edu)</a> the <u>Contest name</u> and <u>Title</u> of the winning entry</h5>
+          </div>
+          <hr>
           <p>
           To assist you with choosing the winning entry we have provided an optional rating system.
             <ul>
@@ -88,10 +91,9 @@ if ($isJudge) {
                     <ul class="list-inline text-center">
                       <li>
                         <address>
-                          <strong>Hannah Ensor</strong><br>
-                            Assistant Director, Hopwood Awards Program<br>
+                          <strong>MFA Contest</strong><br>
                           <abbr title="eMail">e:</abbr>
-                          <a href="mailto:ensorh@umich.edu">ensorh@umich.edu</a>
+                          <a href="mailto:mfacontestnotify@umich.edu">mfacontestnotify@umich.edu</a>
                         </address>
                       </li>
                     </ul>
